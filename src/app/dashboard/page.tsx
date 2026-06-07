@@ -7,6 +7,7 @@ import { Calendar, Star, Crown, Zap, Clock, CheckCircle, XCircle, AlertCircle, P
 import { useAuthStore } from "@/store/authStore";
 import { useBookingStore } from "@/store/bookingStore";
 import { formatDate, formatCurrency, getStatusColor, getStatusLabel } from "@/lib/utils";
+import { playHapticClick, playHapticSuccess } from "@/lib/haptics";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 
@@ -57,12 +58,16 @@ export default function DashboardPage() {
       const nextStamps = stamps + 1;
       setStamps(nextStamps);
       if (nextStamps === 8) {
+        playHapticSuccess();
         setShowVoucher(true);
+      } else {
+        playHapticClick();
       }
     }
   };
 
   const handleResetStamps = () => {
+    playHapticClick();
     setStamps(0);
     setShowVoucher(false);
   };
@@ -71,7 +76,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
       {/* Title */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6 px-1">
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-white tracking-wide">
           Club <span className="text-gradient-gold">VIP</span>
         </h1>
         <p className="text-xs text-neutral-400 mt-1">Beneficios exclusivos y fidelidad digital.</p>
@@ -234,7 +239,7 @@ export default function DashboardPage() {
           <div className="neo-flat rounded-2xl p-6 border border-[var(--border)] text-center">
             <Calendar size={28} className="mx-auto text-neutral-700 mb-2.5" />
             <p className="text-[10px] text-neutral-500 mb-3.5">No tienes citas programadas.</p>
-            <Link href="/reservar">
+            <Link href="/reservar" onClick={playHapticClick}>
               <Button variant="primary" size="sm" className="!py-2 !text-[11px] !rounded-xl font-bold bg-[var(--gold)] text-black">
                 Reservar Ahora
               </Button>
@@ -259,7 +264,7 @@ export default function DashboardPage() {
                 <div className="text-right shrink-0">
                   <p className="text-xs font-bold text-[var(--gold)]">${apt.servicePrice}</p>
                   <button
-                    onClick={() => cancelAppointment(apt.id)}
+                    onClick={() => { playHapticClick(); cancelAppointment(apt.id); }}
                     className="text-[9px] text-red-400 font-semibold hover:underline mt-1 block"
                   >
                     Cancelar

@@ -26,7 +26,7 @@ export default function BlogPage() {
           <BookOpen size={12} className="text-[var(--gold)]" />
           <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Blog</span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-white tracking-wide">
           El Arte del <span className="text-gradient-gold">Grooming</span>
         </h1>
         <p className="text-xs text-neutral-400 mt-1">

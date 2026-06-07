@@ -18,7 +18,7 @@ export default function LoyaltySection() {
           <Crown size={11} className="text-[var(--gold)]" />
           <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Fidelidad</span>
         </div>
-        <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+        <h2 className="text-xl font-black text-[var(--foreground)] tracking-wide">
           Club de Beneficios <span className="text-gradient-gold">VIP</span>
         </h2>
       </motion.div>

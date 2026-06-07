@@ -100,6 +100,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background 0.3s ease, color 0.3s ease;
+  letter-spacing: 0.015em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: 0.03em !important;
 }
 
 /* Custom scrollbar */

@@ -23,7 +23,7 @@ export default function ServicesSection() {
             <Scissors size={11} className="text-[var(--gold)]" />
             <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Menu</span>
           </div>
-          <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+          <h2 className="text-xl font-black text-[var(--foreground)] tracking-wide">
             Servicios <span className="text-gradient-gold">Destacados</span>
           </h2>
         </div>

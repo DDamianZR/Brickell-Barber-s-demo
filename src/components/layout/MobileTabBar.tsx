@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, Scissors, Calendar, Crown, MessageSquare } from "lucide-react";
+import { playHapticClick } from "@/lib/haptics";
 
 export default function MobileTabBar() {
   const pathname = usePathname();
@@ -28,7 +29,7 @@ export default function MobileTabBar() {
           
           if (tab.isCenter) {
             return (
-              <Link key={tab.href} href={tab.href} className="relative -mt-6">
+              <Link key={tab.href} href={tab.href} className="relative -mt-6" onClick={playHapticClick}>
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -47,7 +48,7 @@ export default function MobileTabBar() {
           }
 
           return (
-            <Link key={tab.href} href={tab.href} className="flex flex-col items-center py-1 flex-1 cursor-pointer">
+            <Link key={tab.href} href={tab.href} className="flex flex-col items-center py-1 flex-1 cursor-pointer" onClick={playHapticClick}>
               <motion.div
                 whileTap={{ scale: 0.85 }}
                 className={`relative p-1 rounded-lg flex items-center justify-center ${isActive ? "text-[var(--gold)]" : "text-[var(--foreground)] opacity-50"}`}

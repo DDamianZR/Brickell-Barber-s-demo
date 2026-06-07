@@ -27,7 +27,7 @@ export default function GallerySection() {
             <Images size={11} className="text-[var(--gold)]" />
             <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Galería</span>
           </div>
-          <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+          <h2 className="text-xl font-black text-[var(--foreground)] tracking-wide">
             Nuestros <span className="text-gradient-gold">Resultados</span>
           </h2>
           <p className="text-xs text-neutral-400 mt-1">

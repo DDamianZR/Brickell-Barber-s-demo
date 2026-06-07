@@ -35,7 +35,7 @@ export default function TiendaPage() {
           <Package size={12} className="text-[var(--gold)]" />
           <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Tienda</span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-white tracking-wide">
           Productos <span className="text-gradient-gold">Premium</span>
         </h1>
         <p className="text-xs text-neutral-400 mt-1">

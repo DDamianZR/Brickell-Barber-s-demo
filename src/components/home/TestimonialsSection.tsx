@@ -40,7 +40,7 @@ export default function TestimonialsSection() {
           <MessageSquare size={11} className="text-[var(--gold)]" />
           <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Club</span>
         </div>
-        <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+        <h2 className="text-xl font-black text-[var(--foreground)] tracking-wide">
           La opinión de <span className="text-gradient-gold">los VIPs</span>
         </h2>
         <p className="text-xs text-neutral-400 mt-1">

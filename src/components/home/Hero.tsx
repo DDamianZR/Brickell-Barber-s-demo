@@ -34,7 +34,7 @@ export default function Hero() {
             Miami's Elite Grooming
           </span>
         </div>
-        <h1 className="text-3xl font-black tracking-tight text-[var(--foreground)] leading-tight">
+        <h1 className="text-3xl font-black tracking-wide text-[var(--foreground)] leading-tight">
           {isAuthenticated && user ? (
             <>
               Hola, <span className="text-gradient-gold">{user.name.split(" ")[0]}</span> 👋

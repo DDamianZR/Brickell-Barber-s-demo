@@ -36,7 +36,7 @@ export default function ContactoPage() {
           <Sparkles size={12} className="text-[var(--gold)]" />
           <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Contacto</span>
         </div>
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-white tracking-wide">
           Hablemos <span className="text-gradient-gold">VIP</span>
         </h1>
         <p className="text-xs text-neutral-400 mt-1">

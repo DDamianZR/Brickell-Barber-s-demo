@@ -18,6 +18,7 @@ import { generateId, formatCurrency } from "@/lib/utils";
 import Button from "@/components/ui/Button";
 import Badge from "@/components/ui/Badge";
 import Modal from "@/components/ui/Modal";
+import { playHapticClick, playHapticSuccess } from "@/lib/haptics";
 
 const STEPS = ["Servicio", "Barbero", "Fecha", "Horario", "Confirmar", "Pago"];
 
@@ -109,6 +110,7 @@ export default function ReservarPage() {
     });
     showToast({ title: "¡Cita confirmada!", message: "Has ganado 100 puntos.", type: "success" });
     setLoading(false);
+    playHapticSuccess();
     setSuccessModal(true);
   };
 
@@ -120,7 +122,7 @@ export default function ReservarPage() {
     <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
       {/* Header Info */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6 px-1">
-        <h1 className="text-2xl font-black text-white tracking-tight">
+        <h1 className="text-2xl font-black text-white tracking-wide">
           Reservar <span className="text-gradient-gold">Cita</span>
         </h1>
         <p className="text-xs text-neutral-400 mt-1">Sigue los pasos para agendar tu servicio VIP.</p>
@@ -162,7 +164,7 @@ export default function ReservarPage() {
                 return (
                   <motion.div
                     key={service.id}
-                    onClick={() => setSelectedServiceId(service.id)}
+                    onClick={() => { playHapticClick(); setSelectedServiceId(service.id); }}
                     className={`p-4 rounded-2xl border cursor-pointer select-none ${
                       isSelected
                         ? "neo-concave border-[var(--gold)]/30 text-[var(--gold)]"
@@ -196,7 +198,7 @@ export default function ReservarPage() {
             </div>
             
             <div className="pt-2 flex justify-end">
-              <Button variant="primary" size="md" disabled={!selectedServiceId} onClick={() => setStep(2)} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
+              <Button variant="primary" size="md" disabled={!selectedServiceId} onClick={() => { playHapticClick(); setStep(2); }} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
                 Continuar
               </Button>
             </div>
@@ -221,7 +223,7 @@ export default function ReservarPage() {
                 return (
                   <motion.div
                     key={barber.id}
-                    onClick={() => setSelectedBarberId(barber.id)}
+                    onClick={() => { playHapticClick(); setSelectedBarberId(barber.id); }}
                     className={`rounded-2xl border overflow-hidden cursor-pointer select-none flex flex-col justify-between ${
                       isSelected ? "neo-concave border-[var(--gold)]/30" : "neo-convex border-[var(--border)]"
                     }`}
@@ -254,10 +256,10 @@ export default function ReservarPage() {
             </div>
             
             <div className="pt-2 flex justify-between">
-              <Button variant="secondary" size="md" onClick={() => setStep(1)} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
+              <Button variant="secondary" size="md" onClick={() => { playHapticClick(); setStep(1); }} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
                 Atrás
               </Button>
-              <Button variant="primary" size="md" disabled={!selectedBarberId} onClick={() => setStep(3)} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
+              <Button variant="primary" size="md" disabled={!selectedBarberId} onClick={() => { playHapticClick(); setStep(3); }} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
                 Continuar
               </Button>
             </div>
@@ -279,8 +281,8 @@ export default function ReservarPage() {
             <div className="neo-flat rounded-3xl p-4 border border-[var(--border)] w-full max-w-sm mx-auto">
               <div className="flex items-center justify-between mb-4">
                 <button
-                  onClick={() => { const d = new Date(calendarDate); d.setMonth(d.getMonth() - 1); setCalendarDate(d); }}
-                  className="p-1.5 rounded-xl neo-btn flex items-center justify-center text-xs font-bold text-neutral-400 active:scale-90"
+                  onClick={() => { playHapticClick(); const d = new Date(calendarDate); d.setMonth(d.getMonth() - 1); setCalendarDate(d); }}
+                  className="p-1.5 rounded-xl neo-btn flex items-center justify-center text-xs font-bold text-neutral-400 active:scale-90 cursor-pointer"
                 >
                   ‹
                 </button>
@@ -288,8 +290,8 @@ export default function ReservarPage() {
                   {monthNames[calendarDate.getMonth()]} {calendarDate.getFullYear()}
                 </span>
                 <button
-                  onClick={() => { const d = new Date(calendarDate); d.setMonth(d.getMonth() + 1); setCalendarDate(d); }}
-                  className="p-1.5 rounded-xl neo-btn flex items-center justify-center text-xs font-bold text-neutral-400 active:scale-90"
+                  onClick={() => { playHapticClick(); const d = new Date(calendarDate); d.setMonth(d.getMonth() + 1); setCalendarDate(d); }}
+                  className="p-1.5 rounded-xl neo-btn flex items-center justify-center text-xs font-bold text-neutral-400 active:scale-90 cursor-pointer"
                 >
                   ›
                 </button>
@@ -317,8 +319,8 @@ export default function ReservarPage() {
                     <button
                       key={day}
                       disabled={isDisabled}
-                      onClick={() => setSelectedDate(dateStr)}
-                      className={`aspect-square rounded-xl text-xs font-bold flex items-center justify-center transition-all ${
+                      onClick={() => { playHapticClick(); setSelectedDate(dateStr); }}
+                      className={`aspect-square rounded-xl text-xs font-bold flex items-center justify-center transition-all cursor-pointer ${
                         isSelected
                           ? "neo-concave border border-[var(--gold)]/30 text-[var(--gold)] shadow-inner scale-95"
                           : isDisabled
@@ -340,10 +342,10 @@ export default function ReservarPage() {
             </div>
             
             <div className="pt-2 flex justify-between">
-              <Button variant="secondary" size="md" onClick={() => setStep(2)} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
+              <Button variant="secondary" size="md" onClick={() => { playHapticClick(); setStep(2); }} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
                 Atrás
               </Button>
-              <Button variant="primary" size="md" disabled={!selectedDate} onClick={() => setStep(4)} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
+              <Button variant="primary" size="md" disabled={!selectedDate} onClick={() => { playHapticClick(); setStep(4); }} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
                 Continuar
               </Button>
             </div>
@@ -371,7 +373,7 @@ export default function ReservarPage() {
               <div className="text-center py-10 neo-flat rounded-2xl p-4 border border-[var(--border)]">
                 <Calendar size={32} className="mx-auto text-neutral-600 mb-3" />
                 <p className="text-xs text-neutral-400">No hay horarios disponibles para este día.</p>
-                <Button variant="secondary" size="sm" className="mt-3 !rounded-xl" onClick={() => setStep(3)}>Cambiar fecha</Button>
+                <Button variant="secondary" size="sm" className="mt-3 !rounded-xl" onClick={() => { playHapticClick(); setStep(3); }}>Cambiar fecha</Button>
               </div>
             ) : (
               <div className="grid grid-cols-3 gap-2 max-h-[360px] overflow-y-auto pr-1 py-1">
@@ -380,8 +382,8 @@ export default function ReservarPage() {
                   return (
                     <button
                       key={slot}
-                      onClick={() => setSelectedTime(slot)}
-                      className={`py-3 rounded-xl text-xs font-bold border transition-all ${
+                      onClick={() => { playHapticClick(); setSelectedTime(slot); }}
+                      className={`py-3 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                         isSelected
                           ? "neo-concave border-[var(--gold)]/30 text-[var(--gold)] shadow-inner scale-95"
                           : "neo-btn border-[var(--border)] text-neutral-300"
@@ -395,10 +397,10 @@ export default function ReservarPage() {
             )}
             
             <div className="pt-2 flex justify-between">
-              <Button variant="secondary" size="md" onClick={() => setStep(3)} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
+              <Button variant="secondary" size="md" onClick={() => { playHapticClick(); setStep(3); }} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
                 Atrás
               </Button>
-              <Button variant="primary" size="md" disabled={!selectedTime} onClick={() => setStep(5)} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
+              <Button variant="primary" size="md" disabled={!selectedTime} onClick={() => { playHapticClick(); setStep(5); }} iconRight={<ChevronRight size={14} />} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
                 Continuar
               </Button>
             </div>
@@ -464,14 +466,14 @@ export default function ReservarPage() {
             </div>
             
             <div className="pt-2 flex justify-between">
-              <Button variant="secondary" size="md" onClick={() => setStep(4)} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
+              <Button variant="secondary" size="md" onClick={() => { playHapticClick(); setStep(4); }} icon={<ArrowLeft size={14} />} className="!rounded-xl neo-btn border-0 text-white">
                 Atrás
               </Button>
               <Button
                 variant="primary"
                 size="md"
                 disabled={!isAuthenticated}
-                onClick={() => setStep(6)}
+                onClick={() => { playHapticClick(); setStep(6); }}
                 iconRight={<CreditCard size={14} />}
                 className="!rounded-xl font-bold bg-[var(--gold)] text-black"
               >
@@ -622,7 +624,7 @@ export default function ReservarPage() {
                   loading={loading}
                   disabled={!cardData.name || cardData.number.length < 19 || !cardData.expiry || cardData.cvv.length < 3}
                   icon={<Lock size={13} />}
-                  onClick={handlePayment}
+                  onClick={() => { playHapticClick(); handlePayment(); }}
                   className="!rounded-xl font-bold bg-[var(--gold)] text-black"
                 >
                   Confirmar y Pagar
@@ -631,7 +633,7 @@ export default function ReservarPage() {
                   variant="ghost"
                   size="sm"
                   fullWidth
-                  onClick={() => setStep(5)}
+                  onClick={() => { playHapticClick(); setStep(5); }}
                   icon={<ArrowLeft size={12} />}
                   className="!text-neutral-500 !bg-transparent text-xs"
                 >
@@ -644,7 +646,7 @@ export default function ReservarPage() {
       </AnimatePresence>
 
       {/* Success Modal */}
-      <Modal isOpen={successModal} onClose={() => { setSuccessModal(false); router.push("/dashboard"); }} size="sm">
+      <Modal isOpen={successModal} onClose={() => { playHapticClick(); setSuccessModal(false); router.push("/dashboard"); }} size="sm">
         <div className="text-center py-3 select-none">
           <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 200 }}
             className="w-16 h-16 rounded-full bg-[var(--gold)] flex items-center justify-center mx-auto mb-4">
@@ -662,7 +664,7 @@ export default function ReservarPage() {
             </p>
           </div>
           
-          <Button variant="primary" size="md" fullWidth onClick={() => { setSuccessModal(false); router.push("/dashboard"); }} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
+          <Button variant="primary" size="md" fullWidth onClick={() => { playHapticClick(); setSuccessModal(false); router.push("/dashboard"); }} className="!rounded-xl font-bold bg-[var(--gold)] text-black">
             Ver mis citas
           </Button>
         </div>
