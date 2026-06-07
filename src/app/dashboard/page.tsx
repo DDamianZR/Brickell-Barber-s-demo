@@ -167,7 +167,7 @@ export default function DashboardPage() {
         }}
       >
         <div className="absolute top-0 left-6 right-6 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.35), transparent)" }} />
+          style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.22), transparent)" }} />
 
         <div className="flex items-start justify-between mb-4">
           <div>
@@ -290,7 +290,7 @@ export default function DashboardPage() {
             <p className="text-sm text-neutral-400 mb-4">No tienes citas programadas.</p>
             <Link href="/reservar" onClick={playHapticClick}>
               <button className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-bold text-black cursor-pointer"
-                style={{ background: "var(--gold)", boxShadow: "0 0 16px rgba(0,200,255,0.3)" }}>
+                style={{ background: "var(--gold)", boxShadow: "0 0 10px rgba(0,200,255,0.18)" }}>
                 Reservar Ahora <ArrowRight size={12} />
               </button>
             </Link>

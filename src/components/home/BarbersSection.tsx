@@ -8,23 +8,23 @@ import { playHapticClick } from "@/lib/haptics";
 
 export default function BarbersSection() {
   return (
-    <section className="py-14 px-4" style={{ background: "var(--background)" }}>
+    <section className="py-20 px-5" style={{ background: "var(--background)" }}>
 
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-7"
+        className="mb-10"
       >
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="w-3 h-px" style={{ background: "var(--gold)" }} />
-          <span className="text-[9px] font-bold tracking-[0.25em] uppercase" style={{ color: "var(--gold)" }}>Staff</span>
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-5 h-px opacity-50" style={{ background: "var(--gold)" }} />
+          <span className="text-[10px] font-medium tracking-[0.3em] uppercase opacity-80" style={{ color: "var(--gold)" }}>Staff</span>
         </div>
-        <h2 className="text-xl font-black text-[var(--foreground)] leading-tight">
-          Maestros del <span className="text-gradient-gold">Grooming</span>
+        <h2 className="text-2xl font-light text-[var(--foreground)] leading-tight tracking-tight">
+          Maestros del <span className="font-black text-gradient-gold">Grooming</span>
         </h2>
-        <p className="text-[11px] text-neutral-500 mt-1.5 leading-relaxed">
+        <p className="text-sm text-neutral-500 mt-3 leading-relaxed font-light max-w-xs">
           Artistas de nivel mundial dedicados a perfeccionar tu imagen.
         </p>
       </motion.div>
@@ -57,7 +57,7 @@ export default function BarbersSection() {
 
               {/* Neon top line */}
               <div className="absolute top-0 left-0 right-0 h-px"
-                style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.4), transparent)" }} />
+                style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.22), transparent)" }} />
 
               {/* Availability */}
               {barber.available && (

@@ -202,7 +202,7 @@ export default function MobileHeader() {
                     <div className="flex items-center gap-3 p-3 rounded-2xl"
                       style={{ background: "rgba(0,200,255,0.04)", border: "1px solid rgba(0,200,255,0.1)" }}>
                       <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm shrink-0"
-                        style={{ background: "var(--gold)", color: "black", boxShadow: "0 0 10px rgba(0,200,255,0.3)" }}>
+                        style={{ background: "var(--gold)", color: "black", boxShadow: "0 0 8px rgba(0,200,255,0.18)" }}>
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="min-w-0">
@@ -224,7 +224,7 @@ export default function MobileHeader() {
                 ) : (
                   <Link href="/login" onClick={() => { playHapticClick(); setIsMenuOpen(false); }} className="block">
                     <button className="w-full py-3 text-center text-sm font-bold text-black rounded-2xl transition-all cursor-pointer"
-                      style={{ background: "var(--gold)", boxShadow: "0 0 18px rgba(0,200,255,0.3)" }}>
+                      style={{ background: "var(--gold)", boxShadow: "0 0 12px rgba(0,200,255,0.18)" }}>
                       Iniciar Sesión
                     </button>
                   </Link>

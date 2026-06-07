@@ -52,7 +52,7 @@ export default function TiendaPage() {
               onClick={() => setActive(cat)}
               className={`px-4 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 select-none ${
                 isActive
-                  ? "bg-[var(--gold)] text-black shadow-[0_0_18px_rgba(0,200,255,0.3)]"
+                  ? "bg-[var(--gold)] text-black shadow-[0_0_10px_rgba(0,200,255,0.16)]"
                   : "text-neutral-400 border border-[var(--border)] hover:text-white hover:border-[var(--gold)]/30"
               }`}
               style={!isActive ? { background: "var(--surface)" } : undefined}

@@ -28,22 +28,22 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-14 px-4 relative overflow-hidden"
-      style={{ background: "var(--surface-dark)", borderTop: "1px solid rgba(255,255,255,0.03)" }}>
+    <section className="py-20 px-5 relative overflow-hidden"
+      style={{ background: "var(--surface-dark)", borderTop: "1px solid rgba(255,255,255,0.025)" }}>
 
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-5"
+        className="mb-10"
       >
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="w-3 h-px" style={{ background: "var(--gold)" }} />
-          <span className="text-[9px] font-bold tracking-[0.25em] uppercase" style={{ color: "var(--gold)" }}>Clientes</span>
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-5 h-px opacity-50" style={{ background: "var(--gold)" }} />
+          <span className="text-[10px] font-medium tracking-[0.3em] uppercase opacity-80" style={{ color: "var(--gold)" }}>Clientes</span>
         </div>
-        <h2 className="text-xl font-black text-[var(--foreground)] leading-tight">
-          La voz de los <span className="text-gradient-gold">VIPs</span>
+        <h2 className="text-2xl font-light text-[var(--foreground)] leading-tight tracking-tight">
+          La voz de los <span className="font-black text-gradient-gold">VIPs</span>
         </h2>
       </motion.div>
 

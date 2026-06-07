@@ -11,22 +11,22 @@ const tiers = [
 
 export default function LoyaltySection() {
   return (
-    <section className="py-14 px-4 mb-12"
-      style={{ background: "var(--background)", borderTop: "1px solid rgba(255,255,255,0.03)" }}>
+    <section className="py-20 px-5 mb-16"
+      style={{ background: "var(--background)", borderTop: "1px solid rgba(255,255,255,0.025)" }}>
 
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-5"
+        className="mb-10"
       >
-        <div className="flex items-center gap-2 mb-1.5">
-          <span className="w-3 h-px" style={{ background: "var(--gold)" }} />
-          <span className="text-[9px] font-bold tracking-[0.25em] uppercase" style={{ color: "var(--gold)" }}>Fidelidad</span>
+        <div className="flex items-center gap-2.5 mb-3">
+          <span className="w-5 h-px opacity-50" style={{ background: "var(--gold)" }} />
+          <span className="text-[10px] font-medium tracking-[0.3em] uppercase opacity-80" style={{ color: "var(--gold)" }}>Fidelidad</span>
         </div>
-        <h2 className="text-xl font-black text-[var(--foreground)] leading-tight">
-          Club <span className="text-gradient-gold">VIP</span>
+        <h2 className="text-2xl font-light text-[var(--foreground)] leading-tight tracking-tight">
+          Club <span className="font-black text-gradient-gold">VIP</span>
         </h2>
       </motion.div>
 
@@ -44,7 +44,7 @@ export default function LoyaltySection() {
       >
         {/* Top accent line */}
         <div className="absolute top-0 left-8 right-8 h-px"
-          style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.4), transparent)" }} />
+          style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.22), transparent)" }} />
 
         {/* Background crown */}
         <div className="absolute right-4 top-4 opacity-[0.04]" style={{ color: "var(--gold)" }}>
@@ -83,7 +83,7 @@ export default function LoyaltySection() {
           <div className="flex gap-2.5">
             <Link href="/registro" className="flex-1">
               <button className="w-full py-2.5 rounded-2xl text-[11px] font-bold text-black flex items-center justify-center gap-1.5 transition-all duration-200 cursor-pointer"
-                style={{ background: "var(--gold)", boxShadow: "0 0 16px rgba(0,200,255,0.3)" }}>
+                style={{ background: "var(--gold)", boxShadow: "0 0 10px rgba(0,200,255,0.18)" }}>
                 Unirse al Club <ArrowRight size={11} />
               </button>
             </Link>

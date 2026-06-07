@@ -23,40 +23,40 @@ export default function Hero() {
   const { user, isAuthenticated } = useAuthStore();
 
   return (
-    <section className="relative px-4 pt-8 pb-16 overflow-hidden bg-[var(--background)]">
-      {/* Ambient glow — cyan top right */}
+    <section className="relative px-5 pt-12 pb-20 overflow-hidden bg-[var(--background)]">
+      {/* Ambient glow — cyan top right (más sutil) */}
       <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-[120px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%)" }} />
-      {/* Ambient glow — red bottom left */}
+        style={{ background: "radial-gradient(circle, rgba(0,200,255,0.035) 0%, transparent 70%)" }} />
+      {/* Ambient glow — red bottom left (más sutil) */}
       <div className="absolute bottom-20 -left-10 w-56 h-56 rounded-full blur-[100px] pointer-events-none"
-        style={{ background: "radial-gradient(circle, rgba(255,17,51,0.05) 0%, transparent 70%)" }} />
+        style={{ background: "radial-gradient(circle, rgba(255,17,51,0.025) 0%, transparent 70%)" }} />
 
       {/* 1. Welcome & Greeting */}
       <motion.div
         initial={{ opacity: 0, y: 14 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45 }}
-        className="mb-7"
+        transition={{ duration: 0.5 }}
+        className="mb-10"
       >
-        <div className="flex items-center gap-2 mb-2">
-          <span className="w-4 h-px bg-[var(--gold)] opacity-60" />
-          <span className="text-[10px] font-bold tracking-[0.25em] text-[var(--gold)] uppercase">
-            Miami's Elite Grooming
+        <div className="flex items-center gap-2.5 mb-4">
+          <span className="w-6 h-px bg-[var(--gold)] opacity-40" />
+          <span className="text-[10px] font-medium tracking-[0.3em] text-[var(--gold)] uppercase opacity-80">
+            Miami&apos;s Elite Grooming
           </span>
         </div>
-        <h1 className="text-[28px] font-black leading-tight text-[var(--foreground)]">
+        <h1 className="text-[32px] font-light leading-[1.15] text-[var(--foreground)] tracking-tight">
           {isAuthenticated && user ? (
             <>
-              Hola, <span className="text-gradient-gold">{user.name.split(" ")[0]}</span>
+              Hola, <span className="font-black text-gradient-gold">{user.name.split(" ")[0]}</span>
             </>
           ) : (
             <>
-              Estilo{" "}
-              <span className="text-gradient-gold">Sin Límites</span>
+              Estilo<br />
+              <span className="font-black text-gradient-gold">Sin Límites</span>
             </>
           )}
         </h1>
-        <p className="text-xs text-[var(--foreground)] opacity-45 mt-1.5 leading-relaxed max-w-xs">
+        <p className="text-sm text-[var(--foreground)] opacity-40 mt-4 leading-relaxed max-w-xs font-light">
           Arte, precisión y detalle. Los barberos más exclusivos de Brickell.
         </p>
       </motion.div>
@@ -65,12 +65,12 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.1 }}
-        className="rounded-3xl mb-7 relative overflow-hidden"
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="rounded-3xl mb-12 relative overflow-hidden"
         style={{
           background: "linear-gradient(135deg, #0C0F14 0%, #10141A 100%)",
-          border: "1px solid rgba(0, 200, 255, 0.12)",
-          boxShadow: "0 0 30px rgba(0,200,255,0.05), 6px 6px 14px rgba(0,0,0,0.6), -6px -6px 14px rgba(255,255,255,0.01)"
+          border: "1px solid rgba(0, 200, 255, 0.08)",
+          boxShadow: "5px 5px 12px rgba(0,0,0,0.5), -5px -5px 12px rgba(255,255,255,0.008)"
         }}
       >
         {/* Top neon accent line */}
@@ -111,13 +111,13 @@ export default function Hero() {
       </motion.div>
 
       {/* 3. Haircut Styles Gallery */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-4 px-0.5">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-neutral-500">
+      <div className="mb-12">
+        <div className="flex items-center justify-between mb-6">
+          <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-neutral-400">
             Estilos & Tendencias
           </span>
           <Link href="/servicios">
-            <span className="text-[10px] text-[var(--gold)] font-semibold tracking-wide">Ver todos ›</span>
+            <span className="text-[11px] text-[var(--gold)] font-medium tracking-wide opacity-80">Ver todos</span>
           </Link>
         </div>
 
@@ -173,24 +173,23 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.45, delay: 0.4 }}
-        className="grid grid-cols-3 gap-2.5"
+        transition={{ duration: 0.5, delay: 0.4 }}
+        className="grid grid-cols-3 gap-3"
       >
         {stats.map((stat) => (
           <div key={stat.label}
-            className="p-3 rounded-2xl text-center relative overflow-hidden"
+            className="p-4 rounded-2xl text-center relative overflow-hidden"
             style={{
               background: "#0C0F14",
-              border: "1px solid rgba(255,255,255,0.03)",
-              boxShadow: "4px 4px 10px rgba(0,0,0,0.6), -4px -4px 10px rgba(255,255,255,0.01)"
+              border: "1px solid rgba(255,255,255,0.025)"
             }}
           >
-            <span className="block text-[8px] font-semibold uppercase tracking-[0.15em] text-neutral-600 mb-0.5">{stat.label}</span>
-            <span className="block text-base font-black leading-none"
+            <span className="block text-[9px] font-medium uppercase tracking-[0.2em] text-neutral-600 mb-2">{stat.label}</span>
+            <span className="block text-lg font-light leading-none"
               style={{ color: "var(--gold)" }}>
-              {stat.val}<span className="text-xs">{stat.unit}</span>
+              <span className="font-black">{stat.val}</span><span className="text-xs opacity-70 ml-0.5">{stat.unit}</span>
             </span>
-            <span className="block text-[9px] text-neutral-600 mt-0.5">{stat.desc}</span>
+            <span className="block text-[10px] text-neutral-600 mt-1.5 font-light">{stat.desc}</span>
           </div>
         ))}
       </motion.div>

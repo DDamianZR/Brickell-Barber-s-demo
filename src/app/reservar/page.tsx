@@ -174,7 +174,7 @@ export default function ReservarPage() {
                     className="p-4 rounded-2xl cursor-pointer select-none transition-all"
                     style={isSelected ? {
                       background: "linear-gradient(135deg, rgba(0,200,255,0.06), rgba(255,17,51,0.04))",
-                      border: "1px solid rgba(0,200,255,0.35)",
+                      border: "1px solid rgba(0,200,255,0.22)",
                       boxShadow: "0 0 18px rgba(0,200,255,0.12), inset 4px 4px 8px rgba(0,0,0,0.5)"
                     } : {
                       background: "var(--surface)",
@@ -244,7 +244,7 @@ export default function ReservarPage() {
                     className="rounded-2xl overflow-hidden cursor-pointer select-none flex flex-col justify-between transition-all"
                     style={isSelected ? {
                       background: "linear-gradient(135deg, rgba(0,200,255,0.06), rgba(255,17,51,0.04))",
-                      border: "1px solid rgba(0,200,255,0.4)",
+                      border: "1px solid rgba(0,200,255,0.25)",
                       boxShadow: "0 0 18px rgba(0,200,255,0.15)"
                     } : {
                       background: "var(--surface)",
@@ -351,8 +351,8 @@ export default function ReservarPage() {
                       style={isSelected ? {
                         background: "var(--gold)",
                         color: "black",
-                        boxShadow: "0 0 14px rgba(0,200,255,0.45)",
-                        border: "1px solid rgba(0,200,255,0.6)"
+                        boxShadow: "0 0 10px rgba(0,200,255,0.22)",
+                        border: "1px solid rgba(0,200,255,0.4)"
                       } : isDisabled ? {
                         opacity: 0.18,
                         color: "var(--foreground)"
@@ -422,8 +422,8 @@ export default function ReservarPage() {
                       style={isSelected ? {
                         background: "var(--gold)",
                         color: "black",
-                        boxShadow: "0 0 16px rgba(0,200,255,0.4)",
-                        border: "1px solid rgba(0,200,255,0.6)"
+                        boxShadow: "0 0 10px rgba(0,200,255,0.22)",
+                        border: "1px solid rgba(0,200,255,0.4)"
                       } : {
                         background: "var(--surface)",
                         color: "var(--foreground)",

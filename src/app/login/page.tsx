@@ -116,7 +116,7 @@ export default function LoginPage() {
           }}
         >
           <div className="absolute top-0 left-6 right-6 h-px"
-            style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.4), transparent)" }} />
+            style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.22), transparent)" }} />
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -171,7 +171,7 @@ export default function LoginPage() {
               type="submit"
               disabled={loading}
               className="w-full py-3.5 rounded-2xl text-sm font-bold text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-60 mt-1"
-              style={{ background: "var(--gold)", boxShadow: "0 0 22px rgba(0,200,255,0.3)" }}
+              style={{ background: "var(--gold)", boxShadow: "0 0 14px rgba(0,200,255,0.18)" }}
             >
               {loading ? (
                 <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />

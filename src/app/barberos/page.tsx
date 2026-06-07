@@ -43,7 +43,7 @@ export default function BarberosPage() {
           >
             {/* Top neon line */}
             <div className="absolute top-0 left-0 right-0 h-px"
-              style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.45), transparent)" }} />
+              style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.22), transparent)" }} />
 
             <div className="p-5">
               {/* Header Portrait Row */}
@@ -141,7 +141,7 @@ export default function BarberosPage() {
               {/* CTA */}
               <Link href="/reservar">
                 <button className="w-full py-3.5 rounded-2xl text-sm font-bold text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
-                  style={{ background: "var(--gold)", boxShadow: "0 0 22px rgba(0,200,255,0.3)" }}>
+                  style={{ background: "var(--gold)", boxShadow: "0 0 14px rgba(0,200,255,0.18)" }}>
                   <Calendar size={14} />
                   Reservar con {barber.name.split(" ")[0]}
                   <ArrowRight size={14} />

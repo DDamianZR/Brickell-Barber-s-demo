@@ -9,27 +9,27 @@ export default function ServicesSection() {
   const featured = services.slice(0, 4);
 
   return (
-    <section className="py-14 px-4 relative overflow-hidden"
-      style={{ background: "var(--surface-dark)", borderTop: "1px solid rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
+    <section className="py-20 px-5 relative overflow-hidden"
+      style={{ background: "var(--surface-dark)", borderTop: "1px solid rgba(255,255,255,0.025)", borderBottom: "1px solid rgba(255,255,255,0.025)" }}>
 
       {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-5 flex items-end justify-between"
+        className="mb-8 flex items-end justify-between"
       >
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="w-3 h-px" style={{ background: "var(--gold)" }} />
-            <span className="text-[9px] font-bold tracking-[0.25em] uppercase" style={{ color: "var(--gold)" }}>Menú</span>
+          <div className="flex items-center gap-2.5 mb-3">
+            <span className="w-5 h-px opacity-50" style={{ background: "var(--gold)" }} />
+            <span className="text-[10px] font-medium tracking-[0.3em] uppercase opacity-80" style={{ color: "var(--gold)" }}>Menú</span>
           </div>
-          <h2 className="text-xl font-black text-[var(--foreground)] leading-tight">
-            Servicios <span className="text-gradient-gold">Destacados</span>
+          <h2 className="text-2xl font-light text-[var(--foreground)] leading-tight tracking-tight">
+            Servicios <span className="font-black text-gradient-gold">Destacados</span>
           </h2>
         </div>
         <Link href="/servicios">
-          <span className="text-[11px] font-semibold" style={{ color: "var(--gold)" }}>Ver todos ›</span>
+          <span className="text-[11px] font-medium opacity-80" style={{ color: "var(--gold)" }}>Ver todos</span>
         </Link>
       </motion.div>
 
