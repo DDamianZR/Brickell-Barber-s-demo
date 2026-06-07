@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import MobileHeader from "@/components/layout/MobileHeader";
 import MobileTabBar from "@/components/layout/MobileTabBar";
+import PageTransitionEffect from "@/components/layout/PageTransitionEffect";
 import ToastContainer from "@/components/ui/Toast";
 import CartDrawer from "@/components/layout/CartDrawer";
 import NotificationPanel from "@/components/layout/NotificationPanel";
@@ -148,7 +149,9 @@ export default function RootLayout({
 
                   {/* Page contents (Children render here) */}
                   <div className="flex-1 w-full bg-[var(--background)]">
-                    {children}
+                    <PageTransitionEffect>
+                      {children}
+                    </PageTransitionEffect>
                   </div>
 
                   {/* Mobile tab bar (bottom navigation) */}

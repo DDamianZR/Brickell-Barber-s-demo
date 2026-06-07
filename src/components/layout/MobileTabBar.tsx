@@ -50,9 +50,14 @@ export default function MobileTabBar() {
             <Link key={tab.href} href={tab.href} className="flex flex-col items-center py-1 flex-1 cursor-pointer">
               <motion.div
                 whileTap={{ scale: 0.85 }}
-                className={`relative p-1 rounded-lg ${isActive ? "text-[var(--gold)]" : "text-[var(--foreground)] opacity-50"}`}
+                className={`relative p-1 rounded-lg flex items-center justify-center ${isActive ? "text-[var(--gold)]" : "text-[var(--foreground)] opacity-50"}`}
               >
-                <Icon size={20} className={isActive ? "stroke-[2.2]" : "stroke-[1.8]"} />
+                <motion.div
+                  animate={isActive ? { scale: [1, 1.22, 1] } : { scale: 1 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                >
+                  <Icon size={20} className={isActive ? "stroke-[2.2]" : "stroke-[1.8]"} />
+                </motion.div>
                 {isActive && (
                   <motion.span 
                     layoutId="activeTabIndicator"

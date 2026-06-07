@@ -146,7 +146,14 @@ export default function ReservarPage() {
       <AnimatePresence mode="wait">
         {/* STEP 1: Service Selection */}
         {step === 1 && (
-          <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 px-1">
+          <motion.div
+            key="step1"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="space-y-4 px-1"
+          >
             <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona tu servicio</h2>
             
             <div className="space-y-3.5 max-h-[440px] overflow-y-auto pr-1">
@@ -198,7 +205,14 @@ export default function ReservarPage() {
 
         {/* STEP 2: Barber Selection */}
         {step === 2 && (
-          <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 px-1">
+          <motion.div
+            key="step2"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="space-y-4 px-1"
+          >
             <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona tu barbero</h2>
             
             <div className="grid grid-cols-2 gap-4">
@@ -252,7 +266,14 @@ export default function ReservarPage() {
 
         {/* STEP 3: Date Calendar */}
         {step === 3 && (
-          <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 px-1">
+          <motion.div
+            key="step3"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="space-y-4 px-1"
+          >
             <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona la fecha</h2>
             
             <div className="neo-flat rounded-3xl p-4 border border-[var(--border)] w-full max-w-sm mx-auto">
@@ -331,7 +352,14 @@ export default function ReservarPage() {
 
         {/* STEP 4: Time Selection */}
         {step === 4 && (
-          <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 px-1">
+          <motion.div
+            key="step4"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="space-y-4 px-1"
+          >
             <div>
               <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona el horario</h2>
               <p className="text-[10px] text-[var(--gold)] font-bold uppercase tracking-wider mt-1">
@@ -379,7 +407,14 @@ export default function ReservarPage() {
 
         {/* STEP 5: Confirm Summary */}
         {step === 5 && (
-          <motion.div key="step5" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 px-1">
+          <motion.div
+            key="step5"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="space-y-4 px-1"
+          >
             <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Confirma tu reserva</h2>
             
             <div className="neo-flat rounded-3xl p-5 border border-[var(--border)] relative overflow-hidden">
@@ -448,7 +483,14 @@ export default function ReservarPage() {
 
         {/* STEP 6: Payment Pass */}
         {step === 6 && (
-          <motion.div key="step6" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-4 px-1">
+          <motion.div
+            key="step6"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ type: "spring", stiffness: 300, damping: 28 }}
+            className="space-y-4 px-1"
+          >
             <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Pago seguro</h2>
             
             {/* 3D Credit Card Flip Showcase */}
