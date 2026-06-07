@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Mail, Lock, User, Phone, UserPlus } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, Phone, UserPlus, Sparkles, Award } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useNotificationStore } from "@/store/notificationStore";
 import Button from "@/components/ui/Button";
@@ -35,91 +35,123 @@ export default function RegistroPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center px-4 py-20">
-      <div className="w-full max-w-md">
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <div className="text-center mb-10">
-            <Link href="/" className="inline-flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12 overflow-hidden rounded-full border border-[var(--gold)]/30">
-                <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover scale-110" />
-              </div>
-              <div className="text-left">
-                <span className="text-base font-bold tracking-widest text-[var(--foreground)] uppercase block">Brickell</span>
-                <span className="text-[10px] tracking-[0.3em] text-[var(--gold)] uppercase font-medium">Barber&apos;s</span>
-              </div>
-            </Link>
-            <h1 className="text-3xl font-bold text-[var(--foreground)] mb-2">Crea tu cuenta</h1>
-            <p className="text-sm text-[var(--foreground)] opacity-50">Únete y comienza a acumular puntos premium</p>
+    <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
+      {/* Title Header */}
+      <div className="text-center mb-6 px-1 flex flex-col items-center">
+        <Link href="/" className="inline-flex items-center gap-2 mb-4 active:scale-95 transition-transform">
+          <div className="relative w-10 h-10 overflow-hidden rounded-full border border-[var(--gold)]/30">
+            <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover scale-115" />
           </div>
+          <div className="text-left">
+            <span className="text-sm font-bold tracking-widest text-[var(--foreground)] uppercase block leading-none">Brickell</span>
+            <span className="text-[9px] tracking-[0.25em] text-[var(--gold)] uppercase font-semibold leading-none mt-0.5">Barber&apos;s</span>
+          </div>
+        </Link>
+        
+        <h1 className="text-xl font-black text-white tracking-tight flex items-center gap-1.5 justify-center">
+          <Sparkles size={14} className="text-[var(--gold)]" /> Crear Cuenta
+        </h1>
+        <p className="text-xs text-neutral-400 mt-1 max-w-[85%]">
+          Regístrate gratis y obtén 100 puntos VIP al instante.
+        </p>
+      </div>
 
-          <div className="bg-[var(--surface)] rounded-3xl p-8 border border-[var(--border)]">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {error && (
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                  className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-sm text-red-400 text-center">
-                  {error}
-                </motion.div>
-              )}
+      <div className="space-y-4 px-1">
+        {/* Form Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="neo-flat rounded-3xl p-5 border border-[var(--border)]"
+        >
+          <form onSubmit={handleSubmit} className="space-y-3.5">
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] font-bold text-red-400 text-center"
+              >
+                {error}
+              </motion.div>
+            )}
 
-              {[
-                { key: "name", label: "Nombre completo", icon: User, placeholder: "Tu nombre", type: "text" },
-                { key: "email", label: "Correo electrónico", icon: Mail, placeholder: "tu@email.com", type: "email" },
-                { key: "phone", label: "Teléfono (opcional)", icon: Phone, placeholder: "+1 (305) 555-0100", type: "tel" },
-              ].map(({ key, label, icon: Icon, placeholder, type }) => (
-                <div key={key}>
-                  <label className="text-xs font-medium text-[var(--foreground)] opacity-60 uppercase tracking-wide block mb-2">{label}</label>
-                  <div className="relative">
-                    <Icon size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-30" />
-                    <input
-                      type={type}
-                      value={form[key as keyof typeof form]}
-                      onChange={(e) => setForm({ ...form, [key]: e.target.value })}
-                      placeholder={placeholder}
-                      required={key !== "phone"}
-                      className="w-full pl-11 pr-4 py-3.5 bg-[var(--background)] border border-[var(--border)] rounded-xl text-sm text-[var(--foreground)] placeholder:text-[var(--foreground)] placeholder:opacity-25 focus:border-[var(--gold)]/50 transition-colors"
-                    />
-                  </div>
-                </div>
-              ))}
-
-              <div>
-                <label className="text-xs font-medium text-[var(--foreground)] opacity-60 uppercase tracking-wide block mb-2">Contraseña</label>
+            {[
+              { key: "name", label: "Nombre completo", icon: User, placeholder: "Carlos García", type: "text" },
+              { key: "email", label: "Correo electrónico", icon: Mail, placeholder: "carlos@gmail.com", type: "email" },
+              { key: "phone", label: "Teléfono", icon: Phone, placeholder: "+1 (305) 555-0100", type: "tel" },
+            ].map(({ key, label, icon: Icon, placeholder, type }) => (
+              <div key={key}>
+                <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-wide block mb-1">{label}</label>
                 <div className="relative">
-                  <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-30" />
+                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
+                    <Icon size={13} />
+                  </div>
                   <input
-                    type={showPassword ? "text" : "password"}
-                    value={form.password}
-                    onChange={(e) => setForm({ ...form, password: e.target.value })}
-                    placeholder="Mínimo 6 caracteres"
-                    required
-                    minLength={6}
-                    className="w-full pl-11 pr-12 py-3.5 bg-[var(--background)] border border-[var(--border)] rounded-xl text-sm text-[var(--foreground)] placeholder:text-[var(--foreground)] placeholder:opacity-25 focus:border-[var(--gold)]/50 transition-colors"
+                    type={type}
+                    value={form[key as keyof typeof form]}
+                    onChange={(e) => setForm({ ...form, [key]: e.target.value })}
+                    placeholder={placeholder}
+                    required={key !== "phone"}
+                    className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl neo-input text-white placeholder:text-neutral-600"
                   />
-                  <button type="button" onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-30 hover:opacity-60 transition-opacity">
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
                 </div>
               </div>
+            ))}
 
-              <div className="glass rounded-xl p-3 border border-[var(--gold)]/20">
-                <p className="text-xs text-[var(--foreground)] opacity-60">
-                  🎁 Al registrarte recibes <span className="text-[var(--gold)] font-bold">100 puntos de bienvenida</span> de regalo.
+            <div>
+              <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-wide block mb-1">Contraseña</label>
+              <div className="relative">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
+                  <Lock size={13} />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={form.password}
+                  onChange={(e) => setForm({ ...form, password: e.target.value })}
+                  placeholder="Mínimo 6 caracteres"
+                  required
+                  minLength={6}
+                  className="w-full pl-10 pr-10 py-2.5 text-xs rounded-xl neo-input text-white placeholder:text-neutral-600 font-mono"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
+                >
+                  {showPassword ? <EyeOff size={13} /> : <Eye size={13} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Welcome Gift Banner */}
+            <div className="p-3.5 rounded-2xl bg-[var(--gold-glow)] border border-[var(--gold)]/15 flex items-start gap-2.5 mt-4">
+              <Award size={15} className="text-[var(--gold)] shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-[10px] font-bold text-white uppercase leading-none">Regalo de Bienvenida</h4>
+                <p className="text-[9px] text-neutral-400 mt-1 leading-normal">
+                  Recibes <strong className="text-[var(--gold)] font-bold">100 puntos Club VIP</strong> al completar tu registro para canjear en tu próxima visita.
                 </p>
               </div>
+            </div>
 
-              <Button type="submit" variant="primary" size="lg" fullWidth loading={loading} icon={<UserPlus size={16} />}>
-                Crear cuenta
-              </Button>
-            </form>
+            <Button
+              type="submit"
+              variant="primary"
+              size="md"
+              fullWidth
+              loading={loading}
+              icon={<UserPlus size={13} />}
+              className="!rounded-xl font-bold bg-[var(--gold)] text-black mt-2 pt-3"
+            >
+              Crear cuenta
+            </Button>
+          </form>
 
-            <p className="text-center text-sm text-[var(--foreground)] opacity-40 mt-6">
-              ¿Ya tienes cuenta?{" "}
-              <Link href="/login" className="text-[var(--gold)] hover:underline font-medium opacity-100">
-                Inicia sesión
-              </Link>
-            </p>
-          </div>
+          <p className="text-center text-[10px] text-neutral-500 mt-5 leading-none">
+            ¿Ya tienes cuenta?{" "}
+            <Link href="/login" className="text-[var(--gold)] font-bold hover:underline">
+              Inicia sesión
+            </Link>
+          </p>
         </motion.div>
       </div>
     </div>

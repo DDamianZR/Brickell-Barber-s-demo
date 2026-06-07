@@ -1,100 +1,111 @@
 "use client";
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { Clock, BookOpen, ArrowRight } from "lucide-react";
+import { Clock, BookOpen, ArrowRight, Sparkles } from "lucide-react";
 import { blogPosts } from "@/data/blog";
-import Badge from "@/components/ui/Badge";
+
+const categories = ["Todos", "Corte", "Consejos", "Barba", "Tendencias"];
 
 export default function BlogPage() {
-  const [featured, ...rest] = blogPosts;
+  const [active, setActive] = useState("Todos");
+
+  const filtered = active === "Todos"
+    ? blogPosts
+    : blogPosts.filter((post) => post.category === active);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] pt-24 pb-20">
-      <section className="py-16 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-[0.03]"
-          style={{ backgroundImage: `linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px)`, backgroundSize: "60px 60px" }} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--gold)]/30 bg-[var(--gold-glow)] mb-6">
-              <BookOpen size={12} className="text-[var(--gold)]" />
-              <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">Blog</span>
-            </div>
-            <h1 className="text-5xl sm:text-6xl font-bold text-[var(--foreground)] mb-4">
-              El arte del <span className="text-gradient-gold">grooming</span>
-            </h1>
-            <p className="text-lg text-[var(--foreground)] opacity-50 max-w-xl mx-auto">
-              Consejos, tendencias y guías para el hombre moderno que cuida su imagen.
-            </p>
-          </motion.div>
+    <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
+      {/* Title Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="mb-6 px-1"
+      >
+        <div className="flex items-center gap-1.5 mb-1.5">
+          <BookOpen size={12} className="text-[var(--gold)]" />
+          <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Blog</span>
         </div>
-      </section>
+        <h1 className="text-2xl font-black text-white tracking-tight">
+          El Arte del <span className="text-gradient-gold">Grooming</span>
+        </h1>
+        <p className="text-xs text-neutral-400 mt-1">
+          Guías y consejos del hombre moderno para mantener su estilo.
+        </p>
+      </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Featured */}
-        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-          className="group mb-10 bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--gold)]/30 transition-all duration-300 cursor-pointer">
-          <div className="grid lg:grid-cols-2">
-            <div className="relative h-64 lg:h-auto overflow-hidden">
-              <Image src={featured.image} alt={featured.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-[var(--surface)] hidden lg:block" />
-            </div>
-            <div className="p-8 lg:p-12 flex flex-col justify-center">
-              <div className="flex items-center gap-3 mb-4">
-                <Badge variant="gold">{featured.category}</Badge>
-                <span className="text-xs text-[var(--foreground)] opacity-40">Destacado</span>
-              </div>
-              <h2 className="text-2xl lg:text-3xl font-bold text-[var(--foreground)] mb-3 group-hover:text-[var(--gold)] transition-colors leading-tight">
-                {featured.title}
-              </h2>
-              <p className="text-sm text-[var(--foreground)] opacity-60 leading-relaxed mb-6">{featured.excerpt}</p>
-              <div className="flex items-center gap-4 text-xs text-[var(--foreground)] opacity-40">
-                <span>{featured.author}</span>
-                <span>·</span>
-                <div className="flex items-center gap-1">
-                  <Clock size={12} />
-                  <span>{featured.readTime} min lectura</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+      {/* Category scroll bar */}
+      <div className="mb-6 overflow-x-auto scrollbar-none flex gap-2.5 py-1 px-1">
+        {categories.map((cat) => {
+          const isActive = active === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className={`px-4 py-2.5 rounded-full text-xs font-bold whitespace-nowrap transition-all duration-200 select-none ${
+                isActive
+                  ? "neo-concave border border-[var(--gold)]/30 text-[var(--gold)] shadow-inner"
+                  : "neo-convex border border-[var(--border)] text-neutral-400 hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          );
+        })}
+      </div>
 
-        {/* Rest */}
-        <div className="grid md:grid-cols-2 gap-6">
-          {rest.map((post, i) => (
-            <motion.div key={post.id}
-              initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }}
-              whileHover={{ y: -4 }}
-              className="group bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--gold)]/30 transition-all duration-300 cursor-pointer">
-              <div className="relative h-48 overflow-hidden">
-                <Image src={post.image} alt={post.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] to-transparent" />
-                <div className="absolute top-4 left-4">
-                  <Badge variant="gold" size="sm">{post.category}</Badge>
-                </div>
+      {/* Blog list */}
+      <div className="space-y-4 px-1">
+        <AnimatePresence mode="popLayout">
+          {filtered.map((post, i) => (
+            <motion.div
+              key={post.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, delay: i * 0.05 }}
+              className="neo-flat rounded-2xl p-4 border border-[var(--border)] flex gap-4"
+            >
+              {/* Post Thumbnail */}
+              <div className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden bg-neutral-900 border border-neutral-800">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
-              <div className="p-6">
-                <h3 className="font-bold text-xl text-[var(--foreground)] mb-2 group-hover:text-[var(--gold)] transition-colors leading-tight">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-[var(--foreground)] opacity-50 leading-relaxed mb-4 line-clamp-2">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3 text-xs text-[var(--foreground)] opacity-40">
-                    <span>{post.author}</span>
-                    <div className="flex items-center gap-1">
-                      <Clock size={11} />
+
+              {/* Post Info */}
+              <div className="flex-1 min-w-0 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="px-1.5 py-0.5 rounded-md bg-[var(--gold)]/5 border border-[var(--gold)]/20 text-[8px] text-[var(--gold)] font-bold uppercase tracking-wider">
+                      {post.category}
+                    </span>
+                    <div className="flex items-center gap-0.5 text-[8px] text-neutral-500 font-bold uppercase tracking-wider">
+                      <Clock size={9} />
                       <span>{post.readTime} min</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-[var(--gold)] text-xs font-medium group-hover:gap-2 transition-all">
-                    Leer <ArrowRight size={12} />
-                  </div>
+                  
+                  <h3 className="font-bold text-xs text-white truncate mt-1.5">{post.title}</h3>
+                  <p className="text-[10px] text-neutral-400 mt-1 line-clamp-2 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-between mt-3 pt-2 border-t border-neutral-900/40">
+                  <span className="text-[9px] text-neutral-500 font-bold uppercase">{post.author}</span>
+                  
+                  <button className="flex items-center gap-1 text-[9px] font-bold text-[var(--gold)] hover:translate-x-0.5 transition-transform bg-transparent border-0 active:scale-95">
+                    Leer artículo <ArrowRight size={10} />
+                  </button>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </AnimatePresence>
       </div>
     </div>
   );

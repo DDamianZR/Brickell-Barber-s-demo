@@ -1,124 +1,82 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Crown, Star, Zap, ArrowRight } from "lucide-react";
+import { Crown, ArrowRight, Award } from "lucide-react";
 import Button from "@/components/ui/Button";
-
-const tiers = [
-  {
-    name: "Silver",
-    icon: Star,
-    points: "0 – 399",
-    color: "from-gray-400 to-gray-500",
-    textColor: "text-gray-300",
-    borderColor: "border-gray-500/30",
-    bg: "bg-gray-500/10",
-    perks: ["Descuento 5% en servicios", "Puntos x1 por cita", "Acceso a promociones mensuales"],
-  },
-  {
-    name: "Gold",
-    icon: Crown,
-    points: "400 – 999",
-    color: "from-[#C9A227] to-[#E0B84A]",
-    textColor: "text-[var(--gold)]",
-    borderColor: "border-[var(--gold)]/30",
-    bg: "var(--gold-glow)",
-    perks: ["Descuento 10% en servicios", "Puntos x1.5 por cita", "Reserva prioritaria", "1 servicio gratis al año"],
-    featured: true,
-  },
-  {
-    name: "Black",
-    icon: Zap,
-    points: "1,000+",
-    color: "from-white to-gray-200",
-    textColor: "text-white",
-    borderColor: "border-white/20",
-    bg: "bg-white/5",
-    perks: ["Descuento 20% en todo", "Puntos x2 por cita", "Acceso VIP sin espera", "Productos exclusivos incluidos"],
-  },
-];
 
 export default function LoyaltySection() {
   return (
-    <section className="py-32 bg-[var(--background)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--gold)]/30 bg-[var(--gold-glow)] mb-6">
-            <Crown size={12} className="text-[var(--gold)]" />
-            <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">Programa de Fidelización</span>
-          </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--foreground)] mb-4">
-            Cada visita te acerca a{" "}
-            <span className="text-gradient-gold">beneficios exclusivos</span>
-          </h2>
-          <p className="text-lg text-[var(--foreground)] opacity-50 max-w-xl mx-auto leading-relaxed">
-            Acumula puntos con cada cita y desbloquea un mundo de beneficios diseñados para los que valoran la excelencia.
-          </p>
-        </motion.div>
+    <section className="py-10 bg-[var(--background)] px-4 border-t border-neutral-900 mb-10">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-5 px-1"
+      >
+        <div className="flex items-center gap-1.5 mb-1">
+          <Crown size={11} className="text-[var(--gold)]" />
+          <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Fidelidad</span>
+        </div>
+        <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+          Club de Beneficios <span className="text-gradient-gold">VIP</span>
+        </h2>
+      </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {tiers.map((tier, i) => {
-            const Icon = tier.icon;
-            return (
-              <motion.div
-                key={tier.name}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`relative rounded-3xl p-8 border ${tier.borderColor} transition-all duration-300 ${
-                  tier.featured ? "scale-[1.03] shadow-2xl shadow-[var(--gold)]/10" : ""
-                }`}
-                style={{ background: tier.featured ? "var(--gold-glow)" : "var(--surface)" }}
-              >
-                {tier.featured && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="px-4 py-1 bg-[var(--gold)] text-black text-[10px] font-bold rounded-full uppercase tracking-widest">
-                      Más popular
-                    </span>
-                  </div>
-                )}
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${tier.color} flex items-center justify-center mb-6`}>
-                  <Icon size={24} className="text-black" />
-                </div>
-                <h3 className={`text-2xl font-bold mb-1 ${tier.textColor}`}>{tier.name}</h3>
-                <p className="text-xs text-[var(--foreground)] opacity-40 mb-6">{tier.points} puntos</p>
-                <ul className="space-y-3">
-                  {tier.perks.map((perk) => (
-                    <li key={perk} className="flex items-start gap-2">
-                      <span className={`mt-0.5 w-4 h-4 rounded-full bg-gradient-to-br ${tier.color} flex items-center justify-center flex-shrink-0`}>
-                        <span className="text-[8px] font-bold text-black">✓</span>
-                      </span>
-                      <span className="text-sm text-[var(--foreground)] opacity-70">{perk}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            );
-          })}
+      {/* VIP Promo Card */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="rounded-2xl overflow-hidden p-6 bg-[#0F1013] border border-[var(--border)] relative"
+      >
+        {/* Decorative gold vector crown in background */}
+        <div className="absolute right-3 top-3 opacity-5 text-[var(--gold)]">
+          <Crown size={80} />
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <p className="text-sm text-[var(--foreground)] opacity-40 mb-4">
-            Gana +100 puntos por cada cita. Empieza hoy.
-          </p>
-          <Link href="/registro">
-            <Button variant="primary" size="lg" iconRight={<ArrowRight size={16} />}>
-              Crear cuenta gratis
+        <div className="flex items-center gap-2 mb-3">
+          <div className="w-6 h-6 rounded-lg bg-[var(--gold)]/10 flex items-center justify-center text-[var(--gold)]">
+            <Award size={14} />
+          </div>
+          <span className="text-[10px] font-bold text-neutral-300 uppercase tracking-widest">
+            Brickell VIP Club
+          </span>
+        </div>
+
+        <h3 className="text-base font-bold text-white mb-2 leading-snug">
+          Gana cortes gratis y beneficios en cada visita
+        </h3>
+        <p className="text-xs text-neutral-400 leading-relaxed mb-5">
+          Acumula 100 puntos por cita y completa tu tarjeta de sellos digital para desbloquear servicios gratuitos, descuentos exclusivos y trato prioritario sin esperas.
+        </p>
+
+        <div className="space-y-2.5 mb-6">
+          {[
+            "Silver (0-399 pts): 5% de descuento en servicios.",
+            "Gold (400-999 pts): 10% dto. + Reserva prioritaria.",
+            "Black (1000+ pts): 20% dto. en todo + VIP lounge."
+          ].map((tier, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] shrink-0" />
+              <span className="text-[11px] text-neutral-300 font-medium">{tier}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-2">
+          <Link href="/registro" className="flex-1">
+            <Button variant="primary" size="sm" fullWidth iconRight={<ArrowRight size={13} />} className="!py-2.5 !text-xs !rounded-xl font-bold bg-[var(--gold)] text-black">
+              Unirse al Club
             </Button>
           </Link>
-        </motion.div>
-      </div>
+          <Link href="/dashboard" className="flex-1">
+            <Button variant="secondary" size="sm" fullWidth className="!py-2.5 !text-xs !rounded-xl neo-btn border-0 text-white font-semibold">
+              Ver mi Tarjeta
+            </Button>
+          </Link>
+        </div>
+      </motion.div>
     </section>
   );
 }

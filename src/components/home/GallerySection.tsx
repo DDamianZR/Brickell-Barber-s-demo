@@ -15,23 +15,23 @@ export default function GallerySection() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <section className="py-32 bg-[var(--background)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 bg-[var(--background)] px-4">
+      <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="mb-6 px-1"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--gold)]/30 bg-[var(--gold-glow)] mb-6">
-            <Images size={12} className="text-[var(--gold)]" />
-            <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">Galería</span>
+          <div className="flex items-center gap-1.5 mb-1">
+            <Images size={11} className="text-[var(--gold)]" />
+            <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Galería</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--foreground)] mb-4">
-            Nuestro <span className="text-gradient-gold">trabajo habla</span> por sí solo
+          <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+            Nuestros <span className="text-gradient-gold">Resultados</span>
           </h2>
-          <p className="text-lg text-[var(--foreground)] opacity-50 max-w-xl mx-auto leading-relaxed">
-            Cada corte es una obra única. Explora nuestra galería de trabajos reales.
+          <p className="text-xs text-neutral-400 mt-1">
+            Cada corte es una obra única. Explora trabajos reales.
           </p>
         </motion.div>
 

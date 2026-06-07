@@ -24,24 +24,62 @@
 }
 
 :root {
-  --background: #0A0A0A;
-  --foreground: #FFFFFF;
-  --surface: #1A1A1A;
-  --surface-2: #242424;
-  --border: rgba(255,255,255,0.08);
+  --background: #090A0C;
+  --foreground: #F3F4F6;
+  --surface: #121316;
+  --surface-light: #181A1E;
+  --surface-dark: #0B0C0E;
+  --surface-2: #1B1D22;
+  --border: rgba(255, 255, 255, 0.05);
   --gold: #C9A227;
-  --gold-glow: rgba(201,162,39,0.15);
+  --gold-glow: rgba(201, 162, 39, 0.08);
+  --gold-glow-bright: rgba(201, 162, 39, 0.22);
+  
+  /* Neomorphism shadows */
+  --neo-shadow-dark: rgba(0, 0, 0, 0.65);
+  --neo-shadow-light: rgba(255, 255, 255, 0.015);
+  --neo-border: rgba(255, 255, 255, 0.02);
+  
+  --neo-shadow-out-x: 6px;
+  --neo-shadow-out-y: 6px;
+  --neo-shadow-out-blur: 12px;
+  --neo-shadow-out-color: rgba(0, 0, 0, 0.65);
+  
+  --neo-shadow-in-x: -6px;
+  --neo-shadow-in-y: -6px;
+  --neo-shadow-in-blur: 12px;
+  --neo-shadow-in-color: rgba(255, 255, 255, 0.012);
+  
   color-scheme: dark;
 }
 
 [data-theme="light"] {
-  --background: #F8F8F6;
-  --foreground: #0A0A0A;
-  --surface: #FFFFFF;
-  --surface-2: #F0F0EE;
-  --border: rgba(0,0,0,0.08);
+  --background: #EBF0F3;
+  --foreground: #1B1E22;
+  --surface: #EBF0F3;
+  --surface-light: #FBFFFF;
+  --surface-dark: #D4DCE6;
+  --surface-2: #E1E7EC;
+  --border: rgba(0, 0, 0, 0.05);
   --gold: #A07B10;
-  --gold-glow: rgba(160,123,16,0.1);
+  --gold-glow: rgba(160, 123, 16, 0.06);
+  --gold-glow-bright: rgba(160, 123, 16, 0.15);
+  
+  /* Neomorphism shadows */
+  --neo-shadow-dark: #CCD5E2;
+  --neo-shadow-light: #FFFFFF;
+  --neo-border: rgba(255, 255, 255, 0.4);
+  
+  --neo-shadow-out-x: 6px;
+  --neo-shadow-out-y: 6px;
+  --neo-shadow-out-blur: 12px;
+  --neo-shadow-out-color: #CCD5E2;
+  
+  --neo-shadow-in-x: -6px;
+  --neo-shadow-in-y: -6px;
+  --neo-shadow-in-blur: 12px;
+  --neo-shadow-in-color: #FFFFFF;
+  
   color-scheme: light;
 }
 
@@ -135,14 +173,64 @@ body {
   border: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Neomorphism */
-.neo {
-  background: var(--surface);
-  box-shadow: 8px 8px 16px rgba(0,0,0,0.4), -4px -4px 12px rgba(255,255,255,0.02);
+/* Neomorphism Convex (extruded) */
+.neo-convex {
+  background: linear-gradient(145deg, var(--surface-light), var(--surface-dark));
+  box-shadow: var(--neo-shadow-out-x) var(--neo-shadow-out-y) var(--neo-shadow-out-blur) var(--neo-shadow-out-color),
+              var(--neo-shadow-in-x) var(--neo-shadow-in-y) var(--neo-shadow-in-blur) var(--neo-shadow-in-color);
+  border: 1px solid var(--neo-border);
 }
 
-[data-theme="light"] .neo {
-  box-shadow: 8px 8px 16px rgba(0,0,0,0.1), -4px -4px 12px rgba(255,255,255,0.8);
+/* Neomorphism Concave (pressed/sunken) */
+.neo-concave {
+  background: linear-gradient(145deg, var(--surface-dark), var(--surface-light));
+  box-shadow: inset var(--neo-shadow-out-x) var(--neo-shadow-out-y) var(--neo-shadow-out-blur) var(--neo-shadow-out-color),
+              inset var(--neo-shadow-in-x) var(--neo-shadow-in-y) var(--neo-shadow-in-blur) var(--neo-shadow-in-color);
+  border: 1px solid var(--neo-border);
+}
+
+/* Flat Neomorphism Card (standard soft appearance) */
+.neo-flat {
+  background: var(--surface);
+  box-shadow: 6px 6px 12px var(--neo-shadow-dark),
+              -6px -6px 12px var(--neo-shadow-light);
+  border: 1px solid var(--neo-border);
+}
+
+/* Inset (sunken field or pressed button) */
+.neo-inset {
+  background: var(--surface-dark);
+  box-shadow: inset 4px 4px 8px var(--neo-shadow-dark),
+              inset -4px -4px 8px var(--neo-shadow-light);
+  border: 1px solid var(--neo-border);
+}
+
+/* Interactive Neomorphic Button */
+.neo-btn {
+  background: var(--surface);
+  box-shadow: 4px 4px 8px var(--neo-shadow-dark),
+              -4px -4px 8px var(--neo-shadow-light);
+  border: 1px solid var(--neo-border);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.neo-btn:active, .neo-btn.active {
+  box-shadow: inset 3px 3px 6px var(--neo-shadow-dark),
+              inset -3px -3px 6px var(--neo-shadow-light);
+  transform: scale(0.98);
+}
+
+/* Neomorphic Input Field */
+.neo-input {
+  background: var(--surface-dark);
+  box-shadow: inset 3px 3px 6px var(--neo-shadow-dark),
+              inset -3px -3px 6px var(--neo-shadow-light);
+  border: 1px solid var(--neo-border);
+  transition: border-color 0.2s;
+}
+
+.neo-input:focus {
+  border-color: rgba(201, 162, 39, 0.4);
 }
 
 /* Gold gradient text */
@@ -193,4 +281,16 @@ input:-webkit-autofill:focus {
 #__next-build-watcher,
 nextjs-portal {
   display: none !important;
+}
+
+/* 3D Card Flip utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }

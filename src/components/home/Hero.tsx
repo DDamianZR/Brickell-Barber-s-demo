@@ -2,204 +2,153 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Star, Users, Award } from "lucide-react";
+import { ArrowRight, Star, Clock, Sparkles } from "lucide-react";
+import { useAuthStore } from "@/store/authStore";
 import Button from "@/components/ui/Button";
 
-const stats = [
-  { icon: Users, value: "3,200+", label: "Clientes satisfechos" },
-  { icon: Star, value: "4.9", label: "Calificación promedio" },
-  { icon: Award, value: "8+", label: "Años de experiencia" },
+const haircutStyles = [
+  { name: "Corte Premium", image: "/images/corte-3.png", price: "$35", duration: "45m", popular: true },
+  { name: "Corte + Barba", image: "/images/corte-1.png", price: "$55", duration: "75m", popular: true },
+  { name: "Fade Artístico", image: "/images/corte-2.png", price: "$45", duration: "60m", popular: false },
+  { name: "Texturizado Premium", image: "/images/corte-4.png", price: "$50", duration: "60m", popular: false }
 ];
 
-const images = ["/images/corte-1.png", "/images/corte-2.png", "/images/corte-3.png", "/images/corte-4.png"];
-
 export default function Hero() {
+  const { user, isAuthenticated } = useAuthStore();
+
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background grid */}
-      <div className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(var(--gold) 1px, transparent 1px), linear-gradient(90deg, var(--gold) 1px, transparent 1px)`,
-          backgroundSize: "60px 60px",
-        }}
-      />
+    <section className="relative px-4 pt-6 pb-12 overflow-hidden bg-[var(--background)]">
+      {/* Background soft glow */}
+      <div className="absolute top-0 right-10 w-64 h-64 bg-[var(--gold)] opacity-5 rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[var(--background)] via-[var(--background)] to-[var(--surface)]" />
+      {/* 1. Welcome & Greeting */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mb-6"
+      >
+        <div className="flex items-center gap-2 mb-1.5">
+          <Sparkles size={13} className="text-[var(--gold)]" />
+          <span className="text-[10px] font-bold tracking-widest text-[var(--gold)] uppercase">
+            Miami's Elite Grooming
+          </span>
+        </div>
+        <h1 className="text-3xl font-black tracking-tight text-[var(--foreground)] leading-tight">
+          {isAuthenticated && user ? (
+            <>
+              Hola, <span className="text-gradient-gold">{user.name.split(" ")[0]}</span> 👋
+            </>
+          ) : (
+            <>
+              Estilo <span className="text-gradient-gold">Sin Límites</span>
+            </>
+          )}
+        </h1>
+        <p className="text-xs text-[var(--foreground)] opacity-50 mt-1 max-w-sm">
+          Arte, precisión y detalle. Rediseña tu imagen con los barberos más exclusivos de Brickell.
+        </p>
+      </motion.div>
 
-      {/* Gold glow top-right */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--gold)] opacity-5 rounded-full blur-[120px] pointer-events-none" />
+      {/* 2. Interactive Booking Banner (Neomorphic Convex Card) */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        className="neo-convex p-5 rounded-3xl mb-8 border border-[var(--gold)]/10 relative overflow-hidden"
+      >
+        <div className="absolute -right-6 -bottom-6 w-24 h-24 bg-[var(--gold)]/5 rounded-full blur-xl pointer-events-none" />
+        
+        <h3 className="text-lg font-bold text-white leading-tight">
+          Reserva tu Experiencia VIP
+        </h3>
+        <p className="text-[11px] text-neutral-400 mt-1 mb-4 leading-relaxed max-w-[85%]">
+          Gana <strong className="text-[var(--gold)] font-bold">+100 puntos</strong> de fidelidad hoy. Tu primer corte incluye lavado y bebida de cortesía.
+        </p>
+        
+        <div className="flex gap-2">
+          <Link href="/reservar" className="flex-1">
+            <Button variant="primary" size="sm" fullWidth iconRight={<ArrowRight size={13} />} className="!py-2.5 !text-xs !rounded-xl shadow-md shadow-[var(--gold)]/10 font-bold">
+              Reservar Cita
+            </Button>
+          </Link>
+          <Link href="/servicios">
+            <Button variant="secondary" size="sm" className="!py-2.5 !text-xs !rounded-xl neo-btn border-0 text-white font-semibold">
+              Servicios
+            </Button>
+          </Link>
+        </div>
+      </motion.div>
 
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left */}
-          <div>
+      {/* 3. Haircut Styles Horizontal Swipeable Gallery */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between mb-4 px-1">
+          <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">
+            Estilos y Tendencias
+          </h4>
+          <span className="text-[10px] text-[var(--gold)] font-medium">Desliza para ver ›</span>
+        </div>
+        
+        {/* Horizontal Scroll wrapper */}
+        <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory px-1">
+          {haircutStyles.map((style, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              key={style.name}
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="w-44 shrink-0 snap-start rounded-2xl overflow-hidden neo-flat border border-[var(--border)]"
             >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--gold)]/30 bg-[var(--gold-glow)] mb-8">
-                <span className="w-1.5 h-1.5 bg-[var(--gold)] rounded-full animate-pulse" />
-                <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">
-                  Miami&apos;s Premier Barbershop
-                </span>
+              {/* Image Container */}
+              <div className="relative h-44 w-full overflow-hidden">
+                <Image
+                  src={style.image}
+                  alt={style.name}
+                  fill
+                  className="object-cover transition-transform duration-500 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0E0F12] via-transparent to-transparent" />
+                
+                {style.popular && (
+                  <div className="absolute top-2.5 right-2.5">
+                    <span className="px-2 py-0.5 rounded-full bg-[var(--gold)]/90 text-[8px] font-black text-black uppercase tracking-wider">
+                      Popular
+                    </span>
+                  </div>
+                )}
               </div>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-[var(--foreground)] mb-6"
-            >
-              Más que un corte.{" "}
-              <span className="text-gradient-gold">Una experiencia</span>{" "}
-              premium.
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg text-[var(--foreground)] opacity-60 leading-relaxed mb-10 max-w-lg"
-            >
-              Arte, precisión y detalle. Cada visita es una ceremonia diseñada para transformar no solo tu imagen, sino tu confianza.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4 mb-16"
-            >
-              <Link href="/reservar">
-                <Button variant="primary" size="lg" iconRight={<ArrowRight size={18} />}>
-                  Reservar cita
-                </Button>
-              </Link>
-              <Link href="/servicios">
-                <Button variant="secondary" size="lg">
-                  Ver servicios
-                </Button>
-              </Link>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="grid grid-cols-3 gap-6"
-            >
-              {stats.map(({ icon: Icon, value, label }) => (
-                <div key={label} className="group">
-                  <div className="flex items-center gap-2 mb-1">
-                    <Icon size={16} className="text-[var(--gold)]" />
-                    <span className="text-2xl font-bold text-[var(--foreground)]">{value}</span>
+              
+              {/* Details card content */}
+              <div className="p-3 bg-[#0F1013]/90">
+                <h5 className="font-bold text-xs text-white truncate">{style.name}</h5>
+                
+                <div className="flex items-center justify-between mt-2">
+                  <div className="flex items-center gap-1 text-[10px] text-neutral-400">
+                    <Clock size={10} />
+                    <span>{style.duration}</span>
                   </div>
-                  <p className="text-xs text-[var(--foreground)] opacity-50 leading-tight">{label}</p>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right — image grid */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
-          >
-            <div className="grid grid-cols-2 gap-4 h-[580px]">
-              {/* Col 1 */}
-              <div className="flex flex-col gap-4">
-                <motion.div
-                  animate={{ y: [0, -8, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative flex-1 rounded-3xl overflow-hidden border border-[var(--border)] group"
-                >
-                  <Image src={images[0]} alt="Corte premium" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-xs font-medium text-white tracking-widest uppercase opacity-80">Corte Premium</span>
-                  </div>
-                </motion.div>
-                <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-                  className="relative h-44 rounded-3xl overflow-hidden border border-[var(--border)] group"
-                >
-                  <Image src={images[2]} alt="Fade" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                </motion.div>
-              </div>
-              {/* Col 2 */}
-              <div className="flex flex-col gap-4 pt-10">
-                <motion.div
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-                  className="relative h-44 rounded-3xl overflow-hidden border border-[var(--border)] group"
-                >
-                  <Image src={images[1]} alt="Artístico" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                </motion.div>
-                <motion.div
-                  animate={{ y: [0, -6, 0] }}
-                  transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                  className="relative flex-1 rounded-3xl overflow-hidden border border-[var(--border)] group"
-                >
-                  <Image src={images[3]} alt="Texturizado" fill className="object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-4 left-4">
-                    <span className="text-xs font-medium text-white tracking-widest uppercase opacity-80">Texturizado</span>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-
-            {/* Floating card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8 }}
-              className="absolute -left-8 bottom-20 glass rounded-2xl p-4 border border-[var(--gold)]/20 shadow-2xl"
-            >
-              <div className="flex items-center gap-3">
-                <div className="flex -space-x-2">
-                  {["C", "M", "R"].map((l, i) => (
-                    <div key={i} className="w-8 h-8 rounded-full bg-[var(--gold)] flex items-center justify-center text-black text-xs font-bold border-2 border-[var(--background)]">
-                      {l}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <div className="flex">
-                    {[1,2,3,4,5].map(i => <Star key={i} size={10} className="text-[var(--gold)] fill-[var(--gold)]" />)}
-                  </div>
-                  <p className="text-xs text-[var(--foreground)] opacity-60 mt-0.5">Calidad garantizada</p>
+                  <span className="text-xs font-bold text-[var(--gold)]">{style.price}</span>
                 </div>
               </div>
             </motion.div>
-          </motion.div>
+          ))}
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
-        <span className="text-[10px] tracking-widest text-[var(--foreground)] opacity-30 uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-px h-8 bg-gradient-to-b from-[var(--gold)] to-transparent"
-        />
-      </motion.div>
+      {/* 4. Quick stats indicators */}
+      <div className="grid grid-cols-3 gap-2.5 px-1">
+        {[
+          { label: "Rating VIP", val: "4.9 ★", desc: "En Google" },
+          { label: "Atención", val: "1 a 1", desc: "Sin esperas" },
+          { label: "Bebidas", val: "Gratis", desc: "Con cada cita" }
+        ].map((stat) => (
+          <div key={stat.label} className="p-2.5 rounded-2xl neo-flat border border-neutral-900 text-center">
+            <span className="block text-[8px] font-semibold uppercase tracking-wider text-neutral-500">{stat.label}</span>
+            <span className="block text-sm font-black text-[var(--gold)] mt-0.5">{stat.val}</span>
+            <span className="block text-[8px] text-neutral-500 leading-none mt-0.5">{stat.desc}</span>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

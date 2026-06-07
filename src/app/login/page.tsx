@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Mail, Lock, ArrowRight, LogIn } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, LogIn, Sparkles } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useNotificationStore } from "@/store/notificationStore";
 import Button from "@/components/ui/Button";
 
 const demoAccounts = [
   { label: "Cliente", email: "cliente@brickell.com", password: "cliente123" },
-  { label: "Barbero Jordan", email: "jordan@brickell.com", password: "barber123" },
+  { label: "Barbero", email: "jordan@brickell.com", password: "barber123" },
   { label: "Admin", email: "admin@brickell.com", password: "admin123" },
 ];
 
@@ -47,117 +47,128 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center px-4 py-20">
-      <div className="w-full max-w-md">
+    <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
+      {/* Title */}
+      <div className="text-center mb-6 px-1 flex flex-col items-center">
+        <Link href="/" className="inline-flex items-center gap-2 mb-4 active:scale-95 transition-transform">
+          <div className="relative w-10 h-10 overflow-hidden rounded-full border border-[var(--gold)]/30">
+            <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover scale-115" />
+          </div>
+          <div className="text-left">
+            <span className="text-sm font-bold tracking-widest text-[var(--foreground)] uppercase block leading-none">Brickell</span>
+            <span className="text-[9px] tracking-[0.25em] text-[var(--gold)] uppercase font-semibold leading-none mt-0.5">Barber&apos;s</span>
+          </div>
+        </Link>
+        
+        <h1 className="text-xl font-black text-white tracking-tight flex items-center gap-1.5 justify-center">
+          <Sparkles size={14} className="text-[var(--gold)]" /> Iniciar Sesión
+        </h1>
+        <p className="text-xs text-neutral-400 mt-1 max-w-[85%]">
+          Ingresa al Club VIP y agenda tu próxima experiencia.
+        </p>
+      </div>
+
+      <div className="space-y-5 px-1">
+        {/* Demo Accounts Panel */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          className="neo-flat rounded-2xl p-4 border border-[var(--border)]"
         >
-          {/* Logo */}
-          <div className="text-center mb-10">
-            <Link href="/" className="inline-flex items-center gap-3 mb-6">
-              <div className="relative w-12 h-12 overflow-hidden rounded-full border border-[var(--gold)]/30">
-                <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover scale-110" />
-              </div>
-              <div className="text-left">
-                <span className="text-base font-bold tracking-widest text-[var(--foreground)] uppercase block">Brickell</span>
-                <span className="text-[10px] tracking-[0.3em] text-[var(--gold)] uppercase font-medium">Barber&apos;s</span>
-              </div>
-            </Link>
-            <h1 className="text-3xl font-bold text-[var(--foreground)] mb-2">Bienvenido de nuevo</h1>
-            <p className="text-sm text-[var(--foreground)] opacity-50">Inicia sesión para continuar tu experiencia premium</p>
-          </div>
-
-          {/* Demo accounts */}
-          <div className="glass rounded-2xl p-4 border border-[var(--border)] mb-6">
-            <p className="text-xs font-bold text-[var(--gold)] tracking-widest uppercase mb-3">Cuentas Demo</p>
-            <div className="flex flex-wrap gap-2">
-              {demoAccounts.map((acc) => (
-                <button
-                  key={acc.label}
-                  onClick={() => fillDemo(acc.email, acc.password)}
-                  className="px-3 py-1.5 rounded-xl bg-[var(--surface)] border border-[var(--border)] text-xs text-[var(--foreground)] opacity-70 hover:opacity-100 hover:border-[var(--gold)]/30 transition-all"
-                >
-                  {acc.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Form */}
-          <div className="bg-[var(--surface)] rounded-3xl p-8 border border-[var(--border)]">
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-3 rounded-xl bg-red-500/10 border border-red-500/30 text-sm text-red-400 text-center"
-                >
-                  {error}
-                </motion.div>
-              )}
-
-              <div>
-                <label className="text-xs font-medium text-[var(--foreground)] opacity-60 uppercase tracking-wide block mb-2">
-                  Correo electrónico
-                </label>
-                <div className="relative">
-                  <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-30" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="tu@email.com"
-                    required
-                    className="w-full pl-11 pr-4 py-3.5 bg-[var(--background)] border border-[var(--border)] rounded-xl text-sm text-[var(--foreground)] placeholder:text-[var(--foreground)] placeholder:opacity-25 focus:border-[var(--gold)]/50 transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="text-xs font-medium text-[var(--foreground)] opacity-60 uppercase tracking-wide block mb-2">
-                  Contraseña
-                </label>
-                <div className="relative">
-                  <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-30" />
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="••••••••"
-                    required
-                    className="w-full pl-11 pr-12 py-3.5 bg-[var(--background)] border border-[var(--border)] rounded-xl text-sm text-[var(--foreground)] placeholder:text-[var(--foreground)] placeholder:opacity-25 focus:border-[var(--gold)]/50 transition-colors"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--foreground)] opacity-30 hover:opacity-60 transition-opacity"
-                  >
-                    {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                  </button>
-                </div>
-              </div>
-
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                fullWidth
-                loading={loading}
-                icon={<LogIn size={16} />}
+          <span className="text-[8px] font-black text-[var(--gold)] tracking-widest uppercase block mb-3">
+            Acceso Rápido Demo
+          </span>
+          <div className="flex gap-2">
+            {demoAccounts.map((acc) => (
+              <button
+                key={acc.label}
+                onClick={() => fillDemo(acc.email, acc.password)}
+                className="flex-1 py-2 rounded-xl neo-btn text-[10px] font-bold text-white border border-[var(--border)] active:scale-95"
               >
-                Iniciar sesión
-              </Button>
-            </form>
-
-            <p className="text-center text-sm text-[var(--foreground)] opacity-40 mt-6">
-              ¿No tienes cuenta?{" "}
-              <Link href="/registro" className="text-[var(--gold)] hover:underline font-medium opacity-100">
-                Regístrate gratis
-              </Link>
-            </p>
+                {acc.label}
+              </button>
+            ))}
           </div>
+        </motion.div>
+
+        {/* Inputs Form */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="neo-flat rounded-3xl p-5 border border-[var(--border)]"
+        >
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] font-bold text-red-400 text-center"
+              >
+                {error}
+              </motion.div>
+            )}
+
+            <div>
+              <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-wide block mb-1.5">Correo electrónico</label>
+              <div className="relative">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
+                  <Mail size={13} />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="cliente@brickell.com"
+                  required
+                  className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl neo-input text-white placeholder:text-neutral-600"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-wide block mb-1.5">Contraseña</label>
+              <div className="relative">
+                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
+                  <Lock size={13} />
+                </div>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••"
+                  required
+                  className="w-full pl-10 pr-10 py-2.5 text-xs rounded-xl neo-input text-white placeholder:text-neutral-600 font-mono"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
+                >
+                  {showPassword ? <EyeOff size={13} /> : <Eye size={13} />}
+                </button>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              variant="primary"
+              size="md"
+              fullWidth
+              loading={loading}
+              icon={<LogIn size={13} />}
+              className="!rounded-xl font-bold bg-[var(--gold)] text-black mt-2 pt-3"
+            >
+              Iniciar sesión
+            </Button>
+          </form>
+
+          <p className="text-center text-[10px] text-neutral-500 mt-5 leading-none">
+            ¿No tienes cuenta?{" "}
+            <Link href="/registro" className="text-[var(--gold)] font-bold hover:underline">
+              Regístrate gratis
+            </Link>
+          </p>
         </motion.div>
       </div>
     </div>

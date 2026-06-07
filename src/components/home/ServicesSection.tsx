@@ -2,103 +2,90 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Clock, ArrowRight, Sparkles } from "lucide-react";
+import { Clock, Scissors } from "lucide-react";
 import { services } from "@/data/services";
 import Button from "@/components/ui/Button";
-import Badge from "@/components/ui/Badge";
 
 export default function ServicesSection() {
   const featured = services.slice(0, 4);
 
   return (
-    <section className="py-32 bg-[var(--background)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--gold)]/30 bg-[var(--gold-glow)] mb-6">
-            <Sparkles size={12} className="text-[var(--gold)]" />
-            <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">Servicios</span>
+    <section className="py-10 bg-[var(--surface-dark)] border-y border-neutral-900 px-4">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-6 px-1 flex items-center justify-between"
+      >
+        <div>
+          <div className="flex items-center gap-1.5 mb-1">
+            <Scissors size={11} className="text-[var(--gold)]" />
+            <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Menu</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--foreground)] mb-4">
-            Arte aplicado al <span className="text-gradient-gold">estilo masculino</span>
+          <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+            Servicios <span className="text-gradient-gold">Destacados</span>
           </h2>
-          <p className="text-lg text-[var(--foreground)] opacity-50 max-w-xl mx-auto leading-relaxed">
-            Cada servicio es una experiencia diseñada con precisión milimétrica y los mejores productos del mercado.
-          </p>
-        </motion.div>
+        </div>
+        <Link href="/servicios">
+          <span className="text-xs font-semibold text-[var(--gold)]">Ver todos ›</span>
+        </Link>
+      </motion.div>
 
-        {/* Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map((service, i) => (
-            <motion.div
-              key={service.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -6 }}
-              className="group bg-[var(--surface)] rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--gold)]/30 transition-all duration-300 cursor-pointer"
-            >
-              <div className="relative h-52 overflow-hidden">
-                <Image
-                  src={service.image}
-                  alt={service.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--surface)] via-black/20 to-transparent" />
-                {service.popular && (
-                  <div className="absolute top-4 right-4">
-                    <Badge variant="gold" size="sm">Popular</Badge>
-                  </div>
-                )}
-              </div>
-              <div className="p-6">
-                <h3 className="font-bold text-lg text-[var(--foreground)] mb-2 group-hover:text-[var(--gold)] transition-colors">
-                  {service.name}
-                </h3>
-                <p className="text-xs text-[var(--foreground)] opacity-50 leading-relaxed mb-4 line-clamp-2">
-                  {service.description}
-                </p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1.5 text-[var(--foreground)] opacity-40">
-                    <Clock size={12} />
-                    <span className="text-xs">{service.duration} min</span>
-                  </div>
-                  <span className="text-xl font-bold text-[var(--gold)]">
-                    ${service.price}
+      {/* Horizontal Scroll Cards */}
+      <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-none snap-x snap-mandatory px-1">
+        {featured.map((service, i) => (
+          <motion.div
+            key={service.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.08 }}
+            className="w-56 shrink-0 snap-start rounded-2xl overflow-hidden neo-flat border border-[var(--border)] flex flex-col justify-between"
+          >
+            {/* Image banner */}
+            <div className="relative h-28 w-full">
+              <Image
+                src={service.image}
+                alt={service.name}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1013] via-transparent to-transparent" />
+              {service.popular && (
+                <div className="absolute top-2 right-2">
+                  <span className="px-2 py-0.5 rounded-full bg-[var(--gold)] text-[8px] font-bold text-black uppercase tracking-wide">
+                    Estrella
                   </span>
                 </div>
-                <Link href="/reservar" className="block mt-4">
-                  <Button variant="outline" size="sm" fullWidth>
-                    Reservar
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+              )}
+            </div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center mt-12"
-        >
-          <Link href="/servicios">
-            <Button variant="secondary" size="lg" iconRight={<ArrowRight size={16} />}>
-              Ver todos los servicios
-            </Button>
-          </Link>
-        </motion.div>
+            {/* Info panel */}
+            <div className="p-3.5 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="font-bold text-sm text-white truncate">{service.name}</h3>
+                <p className="text-[10px] text-neutral-400 mt-1 line-clamp-2 leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+
+              <div className="mt-4 pt-2.5 border-t border-neutral-900 flex items-center justify-between">
+                <div className="flex items-center gap-1 text-[10px] text-neutral-500">
+                  <Clock size={10} />
+                  <span>{service.duration} min</span>
+                </div>
+                <span className="text-sm font-bold text-[var(--gold)]">${service.price}</span>
+              </div>
+
+              <Link href="/reservar" className="block mt-3">
+                <Button variant="primary" size="sm" fullWidth className="!py-1.5 !text-[11px] !rounded-xl font-bold bg-transparent text-[var(--gold)] border border-[var(--gold)]/30 hover:bg-[var(--gold)] hover:text-black">
+                  Reservar
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

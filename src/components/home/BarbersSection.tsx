@@ -2,123 +2,91 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Scissors, ArrowRight } from "lucide-react";
+import { Star, Award } from "lucide-react";
 import { barbers } from "@/data/barbers";
-import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 
 export default function BarbersSection() {
   return (
-    <section className="py-32 bg-[var(--surface)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--gold)]/30 bg-[var(--gold-glow)] mb-6">
-            <Scissors size={12} className="text-[var(--gold)]" />
-            <span className="text-xs font-medium text-[var(--gold)] tracking-widest uppercase">Nuestros Barberos</span>
+    <section className="py-10 bg-[var(--background)] px-4">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 15 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="mb-6 px-1 flex items-center justify-between"
+      >
+        <div>
+          <div className="flex items-center gap-1.5 mb-1">
+            <Award size={11} className="text-[var(--gold)]" />
+            <span className="text-[9px] font-bold tracking-widest text-[var(--gold)] uppercase">Staff</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl font-bold text-[var(--foreground)] mb-4">
-            Maestros del <span className="text-gradient-gold">arte</span>
+          <h2 className="text-xl font-black text-[var(--foreground)] tracking-tight">
+            Maestros del <span className="text-gradient-gold">Grooming</span>
           </h2>
-          <p className="text-lg text-[var(--foreground)] opacity-50 max-w-xl mx-auto leading-relaxed">
-            Dos artistas del grooming con años de experiencia y miles de transformaciones exitosas.
-          </p>
-        </motion.div>
+        </div>
+        <Link href="/barberos">
+          <span className="text-xs font-semibold text-[var(--gold)]">Ver más ›</span>
+        </Link>
+      </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          {barbers.map((barber, i) => (
-            <motion.div
-              key={barber.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              whileHover={{ y: -4 }}
-              className="group bg-[var(--background)] rounded-3xl overflow-hidden border border-[var(--border)] hover:border-[var(--gold)]/30 transition-all duration-300"
-            >
-              <div className="relative h-72 overflow-hidden">
-                <Image
-                  src={barber.photo}
-                  alt={barber.name}
-                  fill
-                  className="object-cover object-top group-hover:scale-105 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[var(--background)] via-transparent to-transparent" />
-                {barber.available && (
-                  <div className="absolute top-4 left-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30">
-                    <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
-                    <span className="text-[10px] font-medium text-emerald-400 uppercase tracking-wide">Disponible</span>
-                  </div>
-                )}
+      {/* Side by Side Barbers Grid */}
+      <div className="grid grid-cols-2 gap-3 px-1">
+        {barbers.map((barber, i) => (
+          <motion.div
+            key={barber.id}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: i * 0.1 }}
+            className="rounded-2xl overflow-hidden neo-flat border border-[var(--border)] flex flex-col justify-between"
+          >
+            {/* Barber Portrait */}
+            <div className="relative h-44 w-full bg-neutral-900">
+              <Image
+                src={barber.photo}
+                alt={barber.name}
+                fill
+                className="object-cover object-top"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1013]/90 via-transparent to-transparent" />
+              
+              {/* Rating Badge */}
+              <div className="absolute top-2 right-2 flex items-center gap-0.5 bg-black/60 backdrop-blur-md px-1.5 py-0.5 rounded-full border border-white/5">
+                <Star size={9} className="text-[var(--gold)] fill-[var(--gold)]" />
+                <span className="text-[8px] font-black text-white">{barber.rating}</span>
               </div>
+            </div>
 
-              <div className="p-6">
-                <div className="flex items-start justify-between mb-3">
-                  <div>
-                    <h3 className="text-xl font-bold text-[var(--foreground)] group-hover:text-[var(--gold)] transition-colors">
-                      {barber.name}
-                    </h3>
-                    <p className="text-xs text-[var(--foreground)] opacity-40 mt-0.5">{barber.experience} de experiencia</p>
-                  </div>
-                  <div className="flex items-center gap-1 bg-[var(--gold-glow)] px-2 py-1 rounded-full">
-                    <Star size={12} className="text-[var(--gold)] fill-[var(--gold)]" />
-                    <span className="text-xs font-bold text-[var(--gold)]">{barber.rating}</span>
-                  </div>
-                </div>
-
-                <p className="text-sm text-[var(--foreground)] opacity-50 leading-relaxed mb-4 line-clamp-2">
+            {/* Barber Info */}
+            <div className="p-3 flex-1 flex flex-col justify-between">
+              <div>
+                <h3 className="font-bold text-xs text-white truncate">{barber.name}</h3>
+                <p className="text-[9px] text-[var(--gold)] font-medium mt-0.5">{barber.experience} de exp.</p>
+                <p className="text-[9px] text-neutral-400 mt-1.5 line-clamp-2 leading-relaxed">
                   {barber.bio}
                 </p>
+              </div>
 
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {barber.specialties.map((spec) => (
-                    <Badge key={spec} variant="gold" size="sm">{spec}</Badge>
+              {/* Specialties block */}
+              <div className="mt-3 pt-2 border-t border-neutral-900 flex flex-col gap-2">
+                <div className="flex gap-1 overflow-x-auto scrollbar-none">
+                  {barber.specialties.slice(0, 2).map((spec) => (
+                    <span key={spec} className="px-1.5 py-0.5 rounded-md bg-[var(--gold)]/5 border border-[var(--gold)]/15 text-[8px] text-[var(--gold)] font-medium whitespace-nowrap">
+                      {spec}
+                    </span>
                   ))}
                 </div>
-
-                <div className="flex items-center justify-between mb-4 pt-3 border-t border-[var(--border)]">
-                  <div className="text-center">
-                    <p className="text-lg font-bold text-[var(--foreground)]">{barber.cuts.toLocaleString()}</p>
-                    <p className="text-[10px] text-[var(--foreground)] opacity-40 uppercase tracking-wide">Cortes</p>
-                  </div>
-                  <div className="w-px h-8 bg-[var(--border)]" />
-                  <div className="text-center">
-                    <p className="text-lg font-bold text-[var(--foreground)]">{barber.experience}</p>
-                    <p className="text-[10px] text-[var(--foreground)] opacity-40 uppercase tracking-wide">Experiencia</p>
-                  </div>
-                  <div className="w-px h-8 bg-[var(--border)]" />
-                  <div className="text-center">
-                    <p className="text-lg font-bold text-[var(--gold)]">{barber.rating}</p>
-                    <p className="text-[10px] text-[var(--foreground)] opacity-40 uppercase tracking-wide">Rating</p>
-                  </div>
-                </div>
-
-                <Link href="/reservar">
-                  <Button variant="primary" size="md" fullWidth>
-                    Reservar con {barber.name.split(" ")[0]}
+                
+                <Link href="/reservar" className="block">
+                  <Button variant="primary" size="sm" fullWidth className="!py-1.5 !text-[10px] !rounded-xl font-bold bg-[var(--gold)] text-black">
+                    Reservar
                   </Button>
                 </Link>
               </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center mt-10"
-        >
-          <Link href="/barberos">
-            <Button variant="ghost" size="md" iconRight={<ArrowRight size={15} />}>
-              Conocer más sobre nuestros barberos
-            </Button>
-          </Link>
-        </motion.div>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
