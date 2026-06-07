@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
   basePath: "/Brickell-Barber-s-demo",
   assetPrefix: "/Brickell-Barber-s-demo",
   images: {
-    unoptimized: true,
+    loader: "custom",
+    loaderFile: "./src/lib/imageLoader.ts",
   },
 };
 

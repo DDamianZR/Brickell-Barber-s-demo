@@ -1,2 +1,2 @@
-:HL["/Brickell-Barber-s-demo/_next/static/chunks/430emkktwhtk6.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"hq783dpSEvBiztOD076Jy"}
+:HL["/Brickell-Barber-s-demo/_next/static/chunks/1paorl969bmg_.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"RTKtRN7R1NVBC8-Mb1ljM"}

@@ -6,7 +6,7 @@ import { MessageCircle, X } from "lucide-react";
 export default function WhatsAppButton() {
   const [open, setOpen] = useState(false);
 
-  const phone = "13055550100";
+  const phone = "5521818886";
   const message = encodeURIComponent(
     "¡Hola! Me gustaría reservar una cita en Brickell Barber's. ¿Tienen disponibilidad?"
   );

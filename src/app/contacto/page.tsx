@@ -22,7 +22,7 @@ export default function ContactoPage() {
 
   const info = [
     { icon: MapPin, label: "Dirección", value: "Brickell Ave, Miami, FL 33131" },
-    { icon: Phone, label: "Teléfono", value: "+1 (305) 555-0100" },
+    { icon: Phone, label: "Teléfono", value: "+52 55 2181 8886" },
     { icon: Mail, label: "Email", value: "hola@brickellbarbers.com" },
     { icon: Clock, label: "Horarios", value: "Lun–Vie 9am–7pm · Sáb 9am–4pm" },
   ];
