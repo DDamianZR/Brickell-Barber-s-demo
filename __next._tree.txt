@@ -1,4 +1,4 @@
-:HL["/Brickell-Barber-s-demo/_next/static/chunks/1y0mihpyav4za.css","style"]
+:HL["/Brickell-Barber-s-demo/_next/static/chunks/0tdmzym4_l5g6.css","style"]
 :HL["/Brickell-Barber-s-demo/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/images/logo.jpg","image"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"wpL-Sll8CEB1XpxMynK4U"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"oYjzVGwrNDtg6c9gw_6N7"}
