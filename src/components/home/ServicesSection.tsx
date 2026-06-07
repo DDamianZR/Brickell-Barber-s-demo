@@ -9,7 +9,7 @@ export default function ServicesSection() {
   const featured = services.slice(0, 4);
 
   return (
-    <section className="py-9 px-4 relative overflow-hidden"
+    <section className="py-14 px-4 relative overflow-hidden"
       style={{ background: "var(--surface-dark)", borderTop: "1px solid rgba(255,255,255,0.03)", borderBottom: "1px solid rgba(255,255,255,0.03)" }}>
 
       {/* Section Header */}

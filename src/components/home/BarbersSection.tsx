@@ -8,7 +8,7 @@ import { playHapticClick } from "@/lib/haptics";
 
 export default function BarbersSection() {
   return (
-    <section className="py-9 px-4" style={{ background: "var(--background)" }}>
+    <section className="py-14 px-4" style={{ background: "var(--background)" }}>
 
       {/* Header */}
       <motion.div

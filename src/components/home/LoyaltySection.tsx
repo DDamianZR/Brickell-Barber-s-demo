@@ -11,7 +11,7 @@ const tiers = [
 
 export default function LoyaltySection() {
   return (
-    <section className="py-9 px-4 mb-10"
+    <section className="py-14 px-4 mb-12"
       style={{ background: "var(--background)", borderTop: "1px solid rgba(255,255,255,0.03)" }}>
 
       {/* Header */}

@@ -23,7 +23,7 @@ export default function Hero() {
   const { user, isAuthenticated } = useAuthStore();
 
   return (
-    <section className="relative px-4 pt-5 pb-12 overflow-hidden bg-[var(--background)]">
+    <section className="relative px-4 pt-8 pb-16 overflow-hidden bg-[var(--background)]">
       {/* Ambient glow — cyan top right */}
       <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-[120px] pointer-events-none"
         style={{ background: "radial-gradient(circle, rgba(0,200,255,0.06) 0%, transparent 70%)" }} />
