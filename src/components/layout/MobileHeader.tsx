@@ -149,26 +149,29 @@ export default function MobileHeader() {
             >
               <div>
                 {/* Drawer Header */}
-                <div className="flex items-center justify-between pb-5 border-b border-[var(--border)]">
-                  <div className="flex items-center gap-2">
-                    <div className="relative w-7 h-7 rounded-full border border-[var(--gold)]/30 overflow-hidden">
+                <div className="flex items-center justify-between pb-5"
+                  style={{ borderBottom: "1px solid rgba(0,200,255,0.08)" }}>
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative w-9 h-9 rounded-xl overflow-hidden"
+                      style={{ border: "1px solid rgba(0,200,255,0.25)", boxShadow: "0 0 10px rgba(0,200,255,0.1)" }}>
                       <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-bold tracking-wider text-white uppercase leading-none">BRICKELL</span>
-                      <span className="text-[7px] tracking-[0.2em] text-[var(--gold)] uppercase font-semibold leading-none mt-0.5">BARBER'S</span>
+                      <span className="text-xs font-black tracking-widest text-white uppercase leading-none">BRICKELL</span>
+                      <span className="text-[9px] tracking-[0.25em] font-bold uppercase leading-none mt-1"
+                        style={{ color: "var(--gold)" }}>BARBER&apos;S</span>
                     </div>
                   </div>
                   <button
                     onClick={() => { playHapticClick(); setIsMenuOpen(false); }}
-                    className="p-1 rounded-lg hover:bg-neutral-900 transition-colors cursor-pointer"
+                    className="p-2 rounded-lg transition-colors cursor-pointer hover:bg-white/5"
                   >
-                    <X size={15} className="text-neutral-400" />
+                    <X size={16} className="text-neutral-400" />
                   </button>
                 </div>
 
                 {/* Drawer Links */}
-                <nav className="py-5 space-y-1 overflow-y-auto max-h-[60vh] scrollbar-none">
+                <nav className="py-5 space-y-0.5 overflow-y-auto max-h-[60vh] scrollbar-none">
                   {menuItems.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -176,10 +179,13 @@ export default function MobileHeader() {
                         key={item.href}
                         href={item.href}
                         onClick={() => { playHapticClick(); setIsMenuOpen(false); }}
-                        className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-[var(--surface-light)] transition-all group cursor-pointer"
+                        className="flex items-center gap-3 px-3 py-3 rounded-xl transition-all group cursor-pointer hover:bg-white/[0.03]"
                       >
-                        <Icon size={15} className="text-neutral-500 group-hover:text-[var(--gold)] transition-colors" />
-                        <span className="text-xs font-bold text-neutral-300 group-hover:text-white transition-colors tracking-wide">
+                        <div className="w-9 h-9 rounded-xl flex items-center justify-center transition-all group-hover:scale-105"
+                          style={{ background: "rgba(0,200,255,0.04)", border: "1px solid rgba(0,200,255,0.1)" }}>
+                          <Icon size={15} className="text-neutral-500 group-hover:text-[var(--gold)] transition-colors" />
+                        </div>
+                        <span className="text-sm font-bold text-neutral-300 group-hover:text-white transition-colors tracking-wide">
                           {item.label}
                         </span>
                       </Link>
@@ -188,31 +194,37 @@ export default function MobileHeader() {
                 </nav>
               </div>
 
-              {/* Drawer Footer / Account section */}
-              <div className="pt-4 border-t border-[var(--border)]">
+              {/* Drawer Footer */}
+              <div className="pt-4"
+                style={{ borderTop: "1px solid rgba(0,200,255,0.08)" }}>
                 {isAuthenticated && user ? (
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-xl bg-[var(--gold)] text-black flex items-center justify-center font-bold text-xs border border-[var(--gold)]/50">
+                    <div className="flex items-center gap-3 p-3 rounded-2xl"
+                      style={{ background: "rgba(0,200,255,0.04)", border: "1px solid rgba(0,200,255,0.1)" }}>
+                      <div className="w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm shrink-0"
+                        style={{ background: "var(--gold)", color: "black", boxShadow: "0 0 10px rgba(0,200,255,0.3)" }}>
                         {user.name.charAt(0).toUpperCase()}
                       </div>
                       <div className="min-w-0">
                         <p className="text-xs font-bold text-white truncate leading-none">{user.name}</p>
-                        <span className="text-[8px] font-bold text-[var(--gold)] uppercase tracking-wider block mt-1">
-                          Miembro {user.level} · {user.points} pts
+                        <span className="text-[9px] font-bold uppercase tracking-wider block mt-1.5"
+                          style={{ color: "var(--gold)" }}>
+                          {user.level} · {user.points} pts
                         </span>
                       </div>
                     </div>
                     <button
                       onClick={() => { playHapticClick(); logout(); setIsMenuOpen(false); }}
-                      className="w-full py-2 text-center text-[10px] font-bold uppercase tracking-wider text-red-400 bg-red-500/5 hover:bg-red-500/10 border border-red-500/10 rounded-xl transition-all cursor-pointer"
+                      className="w-full py-2.5 text-center text-[11px] font-bold uppercase tracking-widest text-red-400 rounded-xl transition-all cursor-pointer"
+                      style={{ background: "rgba(255,17,51,0.05)", border: "1px solid rgba(255,17,51,0.15)" }}
                     >
                       Cerrar Sesión
                     </button>
                   </div>
                 ) : (
                   <Link href="/login" onClick={() => { playHapticClick(); setIsMenuOpen(false); }} className="block">
-                    <button className="w-full py-2.5 text-center text-xs font-bold text-black bg-[var(--gold)] rounded-xl hover:bg-[var(--gold-light)] transition-colors tracking-wide cursor-pointer">
+                    <button className="w-full py-3 text-center text-sm font-bold text-black rounded-2xl transition-all cursor-pointer"
+                      style={{ background: "var(--gold)", boxShadow: "0 0 18px rgba(0,200,255,0.3)" }}>
                       Iniciar Sesión
                     </button>
                   </Link>

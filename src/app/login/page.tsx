@@ -4,10 +4,9 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff, Mail, Lock, LogIn, Sparkles } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, LogIn } from "lucide-react";
 import { useAuthStore } from "@/store/authStore";
 import { useNotificationStore } from "@/store/notificationStore";
-import Button from "@/components/ui/Button";
 
 const demoAccounts = [
   { label: "Cliente", email: "cliente@brickell.com", password: "cliente123" },
@@ -41,49 +40,62 @@ export default function LoginPage() {
     }
   };
 
-  const fillDemo = (email: string, password: string) => {
-    setEmail(email);
-    setPassword(password);
-  };
+  const fillDemo = (e: string, p: string) => { setEmail(e); setPassword(p); };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
-      {/* Title */}
-      <div className="text-center mb-6 px-1 flex flex-col items-center">
-        <Link href="/" className="inline-flex items-center gap-2 mb-4 active:scale-95 transition-transform">
-          <div className="relative w-10 h-10 overflow-hidden rounded-full border border-[var(--gold)]/30">
-            <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover scale-115" />
+    <div className="min-h-screen bg-[var(--background)] pt-10 pb-24 px-5 select-none relative overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-72 h-72 rounded-full blur-[120px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(0,200,255,0.08) 0%, transparent 70%)" }} />
+      <div className="absolute bottom-20 -left-10 w-56 h-56 rounded-full blur-[100px] pointer-events-none"
+        style={{ background: "radial-gradient(circle, rgba(255,17,51,0.06) 0%, transparent 70%)" }} />
+
+      {/* Brand */}
+      <div className="text-center mb-8 flex flex-col items-center relative z-10">
+        <Link href="/" className="inline-flex items-center gap-2.5 mb-5 active:scale-95 transition-transform">
+          <div className="relative w-12 h-12 overflow-hidden rounded-2xl"
+            style={{ border: "1px solid rgba(0,200,255,0.25)", boxShadow: "0 0 14px rgba(0,200,255,0.15)" }}>
+            <Image src="/images/logo.jpg" alt="Logo" fill className="object-cover" />
           </div>
           <div className="text-left">
-            <span className="text-sm font-bold tracking-widest text-[var(--foreground)] uppercase block leading-none">Brickell</span>
-            <span className="text-[9px] tracking-[0.25em] text-[var(--gold)] uppercase font-semibold leading-none mt-0.5">Barber&apos;s</span>
+            <span className="text-base font-black tracking-widest text-white uppercase block leading-none">Brickell</span>
+            <span className="text-[10px] tracking-[0.3em] font-bold uppercase leading-none mt-1 block"
+              style={{ color: "var(--gold)" }}>Barber&apos;s</span>
           </div>
         </Link>
-        
-        <h1 className="text-xl font-black text-white tracking-wide flex items-center gap-1.5 justify-center">
-          <Sparkles size={14} className="text-[var(--gold)]" /> Iniciar Sesión
+
+        <h1 className="text-2xl font-black text-white leading-tight">
+          Bienvenido de <span className="text-gradient-gold">Vuelta</span>
         </h1>
-        <p className="text-xs text-neutral-400 mt-1 max-w-[85%]">
-          Ingresa al Club VIP y agenda tu próxima experiencia.
+        <p className="text-sm text-neutral-400 mt-2 max-w-[85%]">
+          Ingresa al Club VIP y agenda tu próxima cita.
         </p>
       </div>
 
-      <div className="space-y-5 px-1">
-        {/* Demo Accounts Panel */}
+      <div className="space-y-4 relative z-10">
+        {/* Demo Accounts */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          className="neo-flat rounded-2xl p-4 border border-[var(--border)]"
+          className="rounded-2xl p-4"
+          style={{
+            background: "var(--surface)",
+            border: "1px solid rgba(0,200,255,0.1)",
+            boxShadow: "4px 4px 10px rgba(0,0,0,0.55), -4px -4px 10px rgba(255,255,255,0.01)"
+          }}
         >
-          <span className="text-[8px] font-black text-[var(--gold)] tracking-widest uppercase block mb-3">
-            Acceso Rápido Demo
-          </span>
+          <div className="flex items-center gap-2 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: "var(--gold)" }} />
+            <span className="text-[10px] font-bold tracking-[0.2em] uppercase" style={{ color: "var(--gold)" }}>
+              Acceso Rápido Demo
+            </span>
+          </div>
           <div className="flex gap-2">
             {demoAccounts.map((acc) => (
               <button
                 key={acc.label}
                 onClick={() => fillDemo(acc.email, acc.password)}
-                className="flex-1 py-2 rounded-xl neo-btn text-[10px] font-bold text-white border border-[var(--border)] active:scale-95"
+                className="flex-1 py-2.5 rounded-xl text-[11px] font-bold text-neutral-300 neo-btn border-0 active:scale-95 cursor-pointer transition-all"
               >
                 {acc.label}
               </button>
@@ -91,81 +103,90 @@ export default function LoginPage() {
           </div>
         </motion.div>
 
-        {/* Inputs Form */}
+        {/* Form */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="neo-flat rounded-3xl p-5 border border-[var(--border)]"
+          className="rounded-3xl p-5 relative overflow-hidden"
+          style={{
+            background: "var(--surface)",
+            border: "1px solid rgba(0,200,255,0.08)",
+            boxShadow: "6px 6px 14px rgba(0,0,0,0.6), -6px -6px 14px rgba(255,255,255,0.01)"
+          }}
         >
+          <div className="absolute top-0 left-6 right-6 h-px"
+            style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.4), transparent)" }} />
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
               <motion.div
                 initial={{ opacity: 0, y: -5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-[10px] font-bold text-red-400 text-center"
+                className="p-3 rounded-xl text-xs font-bold text-red-400 text-center"
+                style={{ background: "rgba(255,17,51,0.08)", border: "1px solid rgba(255,17,51,0.2)" }}
               >
                 {error}
               </motion.div>
             )}
 
             <div>
-              <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-wide block mb-1.5">Correo electrónico</label>
+              <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest block mb-2">Correo</label>
               <div className="relative">
-                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
-                  <Mail size={13} />
-                </div>
+                <Mail size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="cliente@brickell.com"
                   required
-                  className="w-full pl-10 pr-4 py-2.5 text-xs rounded-xl neo-input text-white placeholder:text-neutral-600"
+                  className="w-full pl-11 pr-4 py-3 text-sm rounded-xl neo-input text-white placeholder:text-neutral-600"
                 />
               </div>
             </div>
 
             <div>
-              <label className="text-[9px] font-bold text-neutral-500 uppercase tracking-wide block mb-1.5">Contraseña</label>
+              <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest block mb-2">Contraseña</label>
               <div className="relative">
-                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-500">
-                  <Lock size={13} />
-                </div>
+                <Lock size={14} className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500 pointer-events-none" />
                 <input
                   type={showPassword ? "text" : "password"}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   required
-                  className="w-full pl-10 pr-10 py-2.5 text-xs rounded-xl neo-input text-white placeholder:text-neutral-600 font-mono"
+                  className="w-full pl-11 pr-11 py-3 text-sm rounded-xl neo-input text-white placeholder:text-neutral-600 font-mono"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-white"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-neutral-500 hover:text-white rounded-lg cursor-pointer"
                 >
-                  {showPassword ? <EyeOff size={13} /> : <Eye size={13} />}
+                  {showPassword ? <EyeOff size={14} /> : <Eye size={14} />}
                 </button>
               </div>
             </div>
 
-            <Button
+            <button
               type="submit"
-              variant="primary"
-              size="md"
-              fullWidth
-              loading={loading}
-              icon={<LogIn size={13} />}
-              className="!rounded-xl font-bold bg-[var(--gold)] text-black mt-2 pt-3"
+              disabled={loading}
+              className="w-full py-3.5 rounded-2xl text-sm font-bold text-black flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer disabled:opacity-60 mt-1"
+              style={{ background: "var(--gold)", boxShadow: "0 0 22px rgba(0,200,255,0.3)" }}
             >
-              Iniciar sesión
-            </Button>
+              {loading ? (
+                <span className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <>
+                  <LogIn size={14} />
+                  Iniciar sesión
+                </>
+              )}
+            </button>
           </form>
 
-          <p className="text-center text-[10px] text-neutral-500 mt-5 leading-none">
+          <p className="text-center text-xs text-neutral-500 mt-5">
             ¿No tienes cuenta?{" "}
-            <Link href="/registro" className="text-[var(--gold)] font-bold hover:underline">
+            <Link href="/registro" className="font-bold hover:underline" style={{ color: "var(--gold)" }}>
               Regístrate gratis
             </Link>
           </p>

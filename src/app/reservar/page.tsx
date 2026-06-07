@@ -119,28 +119,33 @@ export default function ReservarPage() {
   const firstDayOffset = getDayOfWeek(calendarDate.getFullYear(), calendarDate.getMonth(), 1);
 
   return (
-    <div className="min-h-screen bg-[var(--background)] pt-6 pb-24 px-4 select-none">
+    <div className="min-h-screen bg-[var(--background)] pt-8 pb-24 px-5 select-none">
       {/* Header Info */}
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-6 px-1">
-        <h1 className="text-2xl font-black text-white tracking-wide">
-          Reservar <span className="text-gradient-gold">Cita</span>
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mb-7">
+        <div className="flex items-center gap-2 mb-2">
+          <span className="w-4 h-px bg-[var(--gold)]" />
+          <span className="text-[10px] font-bold tracking-[0.25em] text-[var(--gold)] uppercase">Reserva</span>
+        </div>
+        <h1 className="text-3xl font-black text-white leading-[1.1]">
+          Agenda tu <span className="text-gradient-gold">Cita</span>
         </h1>
-        <p className="text-xs text-neutral-400 mt-1">Sigue los pasos para agendar tu servicio VIP.</p>
+        <p className="text-sm text-neutral-400 mt-2">Sigue los pasos para agendar tu servicio VIP.</p>
       </motion.div>
 
-      {/* Sleek Mini Progress Indicator */}
-      <div className="mb-6 px-1">
-        <div className="flex justify-between items-center text-[10px] text-neutral-400 font-bold uppercase tracking-wider mb-2">
-          <span>Paso {step}: {STEPS[step - 1]}</span>
-          <span className="text-[var(--gold)]">{Math.round((step / STEPS.length) * 100)}% Completado</span>
+      {/* Progress Indicator */}
+      <div className="mb-7">
+        <div className="flex justify-between items-center text-[11px] font-bold uppercase tracking-widest mb-2.5">
+          <span className="text-neutral-300">Paso {step}: <span style={{ color: "var(--gold)" }}>{STEPS[step - 1]}</span></span>
+          <span style={{ color: "var(--gold)" }}>{Math.round((step / STEPS.length) * 100)}%</span>
         </div>
-        {/* Soft Inset Bar wrapper */}
-        <div className="w-full h-2 rounded-full neo-inset p-0.5 overflow-hidden">
+        <div className="w-full h-2 rounded-full overflow-hidden"
+          style={{ background: "var(--surface-dark)", boxShadow: "inset 2px 2px 4px rgba(0,0,0,0.6), inset -2px -2px 4px rgba(255,255,255,0.01)" }}>
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${(step / STEPS.length) * 100}%` }}
-            transition={{ duration: 0.3 }}
-            className="h-full rounded-full bg-gradient-to-r from-[#2a1792] to-[#8b0003]"
+            transition={{ duration: 0.35 }}
+            className="h-full rounded-full"
+            style={{ background: "linear-gradient(90deg, var(--gold), var(--red-accent))", boxShadow: "0 0 8px rgba(0,200,255,0.5)" }}
           />
         </div>
       </div>
@@ -154,9 +159,9 @@ export default function ReservarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="space-y-4 px-1"
+            className="space-y-4"
           >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona tu servicio</h2>
+            <h2 className="text-base font-bold uppercase tracking-[0.15em] text-neutral-300">Selecciona tu servicio</h2>
             
             <div className="space-y-3.5 max-h-[440px] overflow-y-auto pr-1">
               {services.map((service) => {
@@ -165,30 +170,41 @@ export default function ReservarPage() {
                   <motion.div
                     key={service.id}
                     onClick={() => { playHapticClick(); setSelectedServiceId(service.id); }}
-                    className={`p-4 rounded-2xl border cursor-pointer select-none ${
-                      isSelected
-                        ? "neo-concave border-[var(--gold)]/30 text-[var(--gold)]"
-                        : "neo-convex border-[var(--border)] text-neutral-300"
-                    }`}
+                    whileTap={{ scale: 0.99 }}
+                    className="p-4 rounded-2xl cursor-pointer select-none transition-all"
+                    style={isSelected ? {
+                      background: "linear-gradient(135deg, rgba(0,200,255,0.06), rgba(255,17,51,0.04))",
+                      border: "1px solid rgba(0,200,255,0.35)",
+                      boxShadow: "0 0 18px rgba(0,200,255,0.12), inset 4px 4px 8px rgba(0,0,0,0.5)"
+                    } : {
+                      background: "var(--surface)",
+                      border: "1px solid rgba(255,255,255,0.04)",
+                      boxShadow: "5px 5px 12px rgba(0,0,0,0.55), -5px -5px 12px rgba(255,255,255,0.012)"
+                    }}
                   >
-                    <div className="flex items-start justify-between mb-2">
-                      <h3 className={`font-bold text-xs ${isSelected ? "text-[var(--gold)]" : "text-white"}`}>
+                    <div className="flex items-start justify-between mb-2 gap-3">
+                      <h3 className="font-bold text-sm text-white leading-tight">
                         {service.name}
                       </h3>
-                      {isSelected && (
-                        <div className="w-4 h-4 rounded-full bg-[var(--gold)] flex items-center justify-center shrink-0">
-                          <Check size={10} className="text-black stroke-[3]" />
+                      {isSelected ? (
+                        <div className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
+                          style={{ background: "var(--gold)", boxShadow: "0 0 10px rgba(0,200,255,0.5)" }}>
+                          <Check size={12} className="text-black stroke-[3]" />
                         </div>
+                      ) : (
+                        <div className="w-5 h-5 rounded-full shrink-0"
+                          style={{ border: "1.5px solid rgba(255,255,255,0.15)" }} />
                       )}
                     </div>
-                    <p className="text-[10px] text-neutral-400 leading-relaxed mb-3">{service.description}</p>
-                    
-                    <div className="flex items-center justify-between pt-2 border-t border-neutral-900/40">
-                      <div className="flex items-center gap-1 text-[10px] text-neutral-500">
+                    <p className="text-[11px] text-neutral-500 leading-relaxed mb-3">{service.description}</p>
+
+                    <div className="flex items-center justify-between pt-2.5"
+                      style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                      <div className="flex items-center gap-1.5 text-[11px] text-neutral-500 font-medium">
                         <Clock size={11} />
                         <span>{service.duration} min</span>
                       </div>
-                      <span className={`text-sm font-black ${isSelected ? "text-[var(--gold)]" : "text-[var(--gold)]"}`}>
+                      <span className="text-base font-black" style={{ color: "var(--gold)" }}>
                         ${service.price}
                       </span>
                     </div>
@@ -213,9 +229,9 @@ export default function ReservarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="space-y-4 px-1"
+            className="space-y-4"
           >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona tu barbero</h2>
+            <h2 className="text-base font-bold uppercase tracking-[0.15em] text-neutral-300">Selecciona tu barbero</h2>
             
             <div className="grid grid-cols-2 gap-4">
               {barbers.map((barber) => {
@@ -224,31 +240,42 @@ export default function ReservarPage() {
                   <motion.div
                     key={barber.id}
                     onClick={() => { playHapticClick(); setSelectedBarberId(barber.id); }}
-                    className={`rounded-2xl border overflow-hidden cursor-pointer select-none flex flex-col justify-between ${
-                      isSelected ? "neo-concave border-[var(--gold)]/30" : "neo-convex border-[var(--border)]"
-                    }`}
+                    whileTap={{ scale: 0.98 }}
+                    className="rounded-2xl overflow-hidden cursor-pointer select-none flex flex-col justify-between transition-all"
+                    style={isSelected ? {
+                      background: "linear-gradient(135deg, rgba(0,200,255,0.06), rgba(255,17,51,0.04))",
+                      border: "1px solid rgba(0,200,255,0.4)",
+                      boxShadow: "0 0 18px rgba(0,200,255,0.15)"
+                    } : {
+                      background: "var(--surface)",
+                      border: "1px solid rgba(255,255,255,0.04)",
+                      boxShadow: "5px 5px 12px rgba(0,0,0,0.55), -5px -5px 12px rgba(255,255,255,0.012)"
+                    }}
                   >
-                    <div className="relative h-36 w-full bg-neutral-900">
+                    <div className="relative h-40 w-full">
                       <Image src={barber.photo} alt={barber.name} fill className="object-cover object-top" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0F1013]/90 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#07090C] via-transparent to-transparent" />
                       {isSelected && (
-                        <div className="absolute top-2.5 right-2.5 w-5 h-5 rounded-full bg-[var(--gold)] flex items-center justify-center">
-                          <Check size={11} className="text-black stroke-[3]" />
+                        <div className="absolute top-2.5 right-2.5 w-6 h-6 rounded-full flex items-center justify-center"
+                          style={{ background: "var(--gold)", boxShadow: "0 0 12px rgba(0,200,255,0.6)" }}>
+                          <Check size={13} className="text-black stroke-[3]" />
                         </div>
                       )}
                     </div>
-                    
-                    <div className="p-3">
+
+                    <div className="p-3.5">
                       <div className="flex items-center justify-between gap-1 mb-1">
-                        <h3 className={`font-bold text-xs truncate ${isSelected ? "text-[var(--gold)]" : "text-white"}`}>
+                        <h3 className="font-bold text-sm text-white">
                           {barber.name.split(" ")[0]}
                         </h3>
-                        <div className="flex items-center gap-0.5 shrink-0">
-                          <Star size={9} className="text-[var(--gold)] fill-[var(--gold)]" />
-                          <span className="text-[9px] font-bold text-white">{barber.rating}</span>
+                        <div className="flex items-center gap-1 shrink-0">
+                          <Star size={11} className="text-[var(--gold)] fill-[var(--gold)]" />
+                          <span className="text-[11px] font-bold text-white">{barber.rating}</span>
                         </div>
                       </div>
-                      <span className="text-[9px] text-neutral-500">{barber.experience} de exp.</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider" style={{ color: "var(--gold)" }}>
+                        {barber.experience} exp.
+                      </span>
                     </div>
                   </motion.div>
                 );
@@ -274,9 +301,9 @@ export default function ReservarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="space-y-4 px-1"
+            className="space-y-4"
           >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona la fecha</h2>
+            <h2 className="text-base font-bold uppercase tracking-[0.15em] text-neutral-300">Selecciona la fecha</h2>
             
             <div className="neo-flat rounded-3xl p-4 border border-[var(--border)] w-full max-w-sm mx-auto">
               <div className="flex items-center justify-between mb-4">
@@ -320,13 +347,21 @@ export default function ReservarPage() {
                       key={day}
                       disabled={isDisabled}
                       onClick={() => { playHapticClick(); setSelectedDate(dateStr); }}
-                      className={`aspect-square rounded-xl text-xs font-bold flex items-center justify-center transition-all cursor-pointer ${
-                        isSelected
-                          ? "neo-concave border border-[var(--gold)]/30 text-[var(--gold)] shadow-inner scale-95"
-                          : isDisabled
-                          ? "opacity-15 text-neutral-600 cursor-not-allowed"
-                          : "neo-btn border border-[var(--border)] text-neutral-300"
-                      }`}
+                      className="aspect-square rounded-xl text-sm font-bold flex items-center justify-center transition-all cursor-pointer active:scale-90 disabled:cursor-not-allowed"
+                      style={isSelected ? {
+                        background: "var(--gold)",
+                        color: "black",
+                        boxShadow: "0 0 14px rgba(0,200,255,0.45)",
+                        border: "1px solid rgba(0,200,255,0.6)"
+                      } : isDisabled ? {
+                        opacity: 0.18,
+                        color: "var(--foreground)"
+                      } : {
+                        background: "var(--surface)",
+                        color: "var(--foreground)",
+                        border: "1px solid rgba(255,255,255,0.04)",
+                        boxShadow: "3px 3px 6px rgba(0,0,0,0.5), -3px -3px 6px rgba(255,255,255,0.01)"
+                      }}
                     >
                       {day}
                     </button>
@@ -360,10 +395,10 @@ export default function ReservarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="space-y-4 px-1"
+            className="space-y-4"
           >
             <div>
-              <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Selecciona el horario</h2>
+              <h2 className="text-base font-bold uppercase tracking-[0.15em] text-neutral-300">Selecciona el horario</h2>
               <p className="text-[10px] text-[var(--gold)] font-bold uppercase tracking-wider mt-1">
                 {selectedDate && new Date(selectedDate).toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long" })}
               </p>
@@ -383,11 +418,18 @@ export default function ReservarPage() {
                     <button
                       key={slot}
                       onClick={() => { playHapticClick(); setSelectedTime(slot); }}
-                      className={`py-3 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
-                        isSelected
-                          ? "neo-concave border-[var(--gold)]/30 text-[var(--gold)] shadow-inner scale-95"
-                          : "neo-btn border-[var(--border)] text-neutral-300"
-                      }`}
+                      className="py-3.5 rounded-xl text-sm font-bold transition-all cursor-pointer active:scale-95"
+                      style={isSelected ? {
+                        background: "var(--gold)",
+                        color: "black",
+                        boxShadow: "0 0 16px rgba(0,200,255,0.4)",
+                        border: "1px solid rgba(0,200,255,0.6)"
+                      } : {
+                        background: "var(--surface)",
+                        color: "var(--foreground)",
+                        border: "1px solid rgba(255,255,255,0.05)",
+                        boxShadow: "3px 3px 8px rgba(0,0,0,0.55), -3px -3px 8px rgba(255,255,255,0.01)"
+                      }}
                     >
                       {slot}
                     </button>
@@ -415,9 +457,9 @@ export default function ReservarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="space-y-4 px-1"
+            className="space-y-4"
           >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Confirma tu reserva</h2>
+            <h2 className="text-base font-bold uppercase tracking-[0.15em] text-neutral-300">Confirma tu reserva</h2>
             
             <div className="neo-flat rounded-3xl p-5 border border-[var(--border)] relative overflow-hidden">
               <span className="text-[9px] font-black text-[var(--gold)] tracking-widest uppercase block mb-3 border-b border-neutral-900 pb-2">
@@ -491,9 +533,9 @@ export default function ReservarPage() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            className="space-y-4 px-1"
+            className="space-y-4"
           >
-            <h2 className="text-sm font-bold uppercase tracking-wider text-neutral-400">Pago seguro</h2>
+            <h2 className="text-base font-bold uppercase tracking-[0.15em] text-neutral-300">Pago seguro</h2>
             
             {/* 3D Credit Card Flip Showcase */}
             <div className="perspective-1000 w-full h-44 relative mb-4">

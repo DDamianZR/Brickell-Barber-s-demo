@@ -8,6 +8,7 @@ import ToastContainer from "@/components/ui/Toast";
 import CartDrawer from "@/components/layout/CartDrawer";
 import NotificationPanel from "@/components/layout/NotificationPanel";
 import ThemeProvider from "@/components/providers/ThemeProvider";
+import { Layers, Zap, Crown, ShoppingBag } from "lucide-react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -82,21 +83,43 @@ export default function RootLayout({
                 </p>
 
                 {/* Features */}
-                <div className="space-y-5">
+                <div className="space-y-4">
                   {[
-                    { title: "Neomorfismo Oscuro", desc: "Relieves táctiles sobre fondos profundos que invitan a interactuar.", icon: "◆" },
-                    { title: "Reserva en 3 Clics", desc: "Flujo optimizado para elegir servicio, barbero y hora al instante.", icon: "◆" },
-                    { title: "Club VIP Digital", desc: "Tarjeta de sellos y puntos acumulables con beneficios premium.", icon: "◆" }
+                    { title: "Neon-Noir Premium", desc: "Estética táctil con relieves y luces inspirada en el letrero del barbershop.", Icon: Layers },
+                    { title: "Reserva en 3 Clics", desc: "Flujo optimizado para elegir servicio, barbero y hora al instante.", Icon: Zap },
+                    { title: "Club VIP Digital", desc: "Tarjeta de sellos y puntos acumulables con beneficios premium.", Icon: Crown },
+                    { title: "Tienda Integrada", desc: "Productos premium con carrito y checkout completo en la misma app.", Icon: ShoppingBag }
                   ].map((feat, i) => (
-                    <div key={i} className="flex gap-3.5 group">
-                      <div className="w-5 h-5 rounded-lg flex items-center justify-center mt-0.5 shrink-0 text-[8px]"
-                        style={{ background: "rgba(0,200,255,0.08)", border: "1px solid rgba(0,200,255,0.15)", color: "var(--gold)" }}>
-                        {feat.icon}
+                    <div key={i} className="flex gap-3.5 group p-3 rounded-2xl transition-all hover:bg-white/[0.015]">
+                      <div className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 transition-all group-hover:scale-105"
+                        style={{
+                          background: "rgba(0,200,255,0.06)",
+                          border: "1px solid rgba(0,200,255,0.18)",
+                          color: "var(--gold)",
+                          boxShadow: "0 0 10px rgba(0,200,255,0.05)"
+                        }}>
+                        <feat.Icon size={15} />
                       </div>
-                      <div>
-                        <h4 className="text-sm font-bold text-neutral-200">{feat.title}</h4>
-                        <p className="text-[11px] text-neutral-600 mt-0.5 leading-relaxed">{feat.desc}</p>
+                      <div className="flex-1">
+                        <h4 className="text-sm font-bold text-neutral-100">{feat.title}</h4>
+                        <p className="text-[12px] text-neutral-500 mt-1 leading-relaxed">{feat.desc}</p>
                       </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Stats Strip */}
+                <div className="mt-8 grid grid-cols-3 gap-3 pt-7"
+                  style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                  {[
+                    { val: "13", label: "Pantallas" },
+                    { val: "6", label: "Pasos UX" },
+                    { val: "100%", label: "Responsive" }
+                  ].map((stat, i) => (
+                    <div key={i} className="text-center p-3 rounded-2xl"
+                      style={{ background: "rgba(255,255,255,0.015)", border: "1px solid rgba(255,255,255,0.03)" }}>
+                      <div className="text-xl font-black" style={{ color: "var(--gold)" }}>{stat.val}</div>
+                      <div className="text-[9px] font-bold tracking-widest text-neutral-600 uppercase mt-1">{stat.label}</div>
                     </div>
                   ))}
                 </div>
@@ -143,11 +166,19 @@ export default function RootLayout({
             </aside>
 
             {/* 2. Interactive Phone Viewport (Right Column on Desktop, Full screen on Mobile) */}
-            <main className="flex-1 flex items-center justify-center bg-[#07080A] lg:bg-[#07080A]/40 p-0 lg:p-6 overflow-hidden">
-              
+            <main className="flex-1 flex items-center justify-center bg-[#07080A] lg:bg-[#07080A]/40 p-0 lg:p-6 overflow-hidden relative">
+
+              {/* Desktop background ambient glow behind phone */}
+              <div className="hidden lg:block absolute inset-0 pointer-events-none">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full blur-[140px]"
+                  style={{ background: "radial-gradient(circle, rgba(0,200,255,0.05) 0%, transparent 70%)" }} />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[700px] rounded-full blur-[100px]"
+                  style={{ background: "radial-gradient(circle, rgba(255,17,51,0.04) 0%, transparent 70%)" }} />
+              </div>
+
               {/* iPhone 16 Pro Style Bezel Frame - Desktop Only styling, expands on mobile */}
-              <div className="w-full h-full lg:w-[393px] lg:h-[844px] lg:rounded-[44px] lg:border-[10px] lg:border-neutral-900 lg:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] lg:relative lg:overflow-hidden lg:flex lg:flex-col lg:bg-[#090A0C]">
-                
+              <div className="w-full h-full lg:w-[393px] lg:h-[844px] lg:rounded-[44px] lg:border-[10px] lg:border-neutral-900 lg:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95),0_0_40px_-10px_rgba(0,200,255,0.18)] lg:relative lg:overflow-hidden lg:flex lg:flex-col lg:bg-[#090A0C] z-10">
+
                 {/* Dynamic Island Screen Cutout - Desktop Only */}
                 <div className="hidden lg:block absolute top-3.5 left-1/2 -translate-x-1/2 w-28 h-6.5 bg-black rounded-full z-50 border border-neutral-900/50" />
                 
