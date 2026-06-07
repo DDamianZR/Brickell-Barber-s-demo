@@ -2,117 +2,133 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { Star, Award, Scissors } from "lucide-react";
+import { Star, ArrowRight } from "lucide-react";
 import { barbers } from "@/data/barbers";
 import { playHapticClick } from "@/lib/haptics";
-import Button from "@/components/ui/Button";
 
 export default function BarbersSection() {
   return (
-    <section className="py-12 bg-[var(--background)] px-4">
-      {/* Section Header */}
+    <section className="py-9 px-4" style={{ background: "var(--background)" }}>
+
+      {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
+        initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="mb-8 px-1"
+        className="mb-7"
       >
-        <div className="flex items-center gap-1.5 mb-1">
-          <Scissors size={12} className="text-[var(--gold)]" />
-          <span className="text-[9px] font-bold tracking-[0.2em] text-[var(--gold)] uppercase">Staff</span>
+        <div className="flex items-center gap-2 mb-1.5">
+          <span className="w-3 h-px" style={{ background: "var(--gold)" }} />
+          <span className="text-[9px] font-bold tracking-[0.25em] uppercase" style={{ color: "var(--gold)" }}>Staff</span>
         </div>
-        <h2 className="text-2xl font-black text-[var(--foreground)] tracking-wide">
+        <h2 className="text-xl font-black text-[var(--foreground)] leading-tight">
           Maestros del <span className="text-gradient-gold">Grooming</span>
         </h2>
-        <p className="text-xs text-neutral-400 mt-1.5 leading-relaxed tracking-wide">
-          Dos artistas de nivel mundial dedicados a perfeccionar tu imagen.
+        <p className="text-[11px] text-neutral-500 mt-1.5 leading-relaxed">
+          Artistas de nivel mundial dedicados a perfeccionar tu imagen.
         </p>
       </motion.div>
 
-      {/* Vertical List of Full-Width Barber Cards */}
-      <div className="space-y-8 px-1">
+      {/* Barber Cards */}
+      <div className="space-y-6">
         {barbers.map((barber, i) => (
           <motion.div
             key={barber.id}
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.15 }}
-            className="rounded-3xl overflow-hidden neo-flat border border-[var(--border)] p-5 flex flex-col justify-between"
+            transition={{ duration: 0.45, delay: i * 0.12 }}
+            className="rounded-3xl overflow-hidden"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid rgba(255,255,255,0.04)",
+              boxShadow: "6px 6px 14px rgba(0,0,0,0.6), -6px -6px 14px rgba(255,255,255,0.01)"
+            }}
           >
-            {/* Portrait Image */}
-            <div className="relative h-60 w-full rounded-2xl overflow-hidden mb-4 border border-neutral-900 bg-neutral-900 shadow-inner">
+            {/* Portrait */}
+            <div className="relative h-56 w-full overflow-hidden">
               <Image
                 src={barber.photo}
                 alt={barber.name}
                 fill
                 className="object-cover object-top"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F1013]/90 via-transparent to-transparent" />
-              
-              {/* Availability tag */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0C0F14] via-black/20 to-transparent" />
+
+              {/* Neon top line */}
+              <div className="absolute top-0 left-0 right-0 h-px"
+                style={{ background: "linear-gradient(90deg, transparent, rgba(0,200,255,0.4), transparent)" }} />
+
+              {/* Availability */}
               {barber.available && (
-                <div className="absolute top-3 left-3 flex items-center gap-1 bg-emerald-500/20 backdrop-blur-md px-2.5 py-1 rounded-full border border-emerald-500/30">
+                <div className="absolute top-3 left-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full backdrop-blur-md"
+                  style={{ background: "rgba(0,200,50,0.15)", border: "1px solid rgba(0,200,50,0.25)" }}>
                   <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse" />
                   <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-wider">Disponible</span>
                 </div>
               )}
 
-              {/* Float Rating Badge */}
-              <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-md px-2.5 py-1 rounded-xl border border-white/5 shadow-lg">
-                <Star size={11} className="text-[var(--gold)] fill-[var(--gold)]" />
+              {/* Rating */}
+              <div className="absolute bottom-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-xl backdrop-blur-md"
+                style={{ background: "rgba(0,0,0,0.55)", border: "1px solid rgba(255,255,255,0.06)" }}>
+                <Star size={11} className="fill-[var(--gold)] text-[var(--gold)]" />
                 <span className="text-xs font-black text-white">{barber.rating}</span>
+              </div>
+
+              {/* Name overlay */}
+              <div className="absolute bottom-4 left-4">
+                <h3 className="text-base font-black text-white">{barber.name}</h3>
+                <span className="text-[9px] font-bold uppercase tracking-widest" style={{ color: "var(--gold)" }}>
+                  {barber.experience} de experiencia
+                </span>
               </div>
             </div>
 
-            {/* Profile Info details */}
-            <div className="flex-1 flex flex-col justify-between">
-              <div>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-base font-bold text-white tracking-wide">{barber.name}</h3>
-                    <span className="text-[9px] font-semibold text-[var(--gold)] uppercase tracking-widest mt-0.5 block">
-                      {barber.experience} de experiencia
-                    </span>
-                  </div>
-                </div>
-                
-                <p className="text-xs text-neutral-400 mt-3.5 leading-relaxed tracking-wide text-justify">
-                  {barber.bio}
-                </p>
-              </div>
+            {/* Info Panel */}
+            <div className="p-4.5" style={{ padding: "18px" }}>
+              <p className="text-[11px] text-neutral-500 leading-relaxed mb-4">
+                {barber.bio}
+              </p>
 
-              {/* Specialties block */}
-              <div className="mt-4 pt-3 border-t border-neutral-900/60">
-                <span className="text-[8px] font-bold text-neutral-500 uppercase tracking-[0.15em] block mb-2">
+              {/* Specialties */}
+              <div className="mb-4">
+                <span className="text-[8px] font-bold uppercase tracking-[0.18em] text-neutral-600 block mb-2">
                   Especialidades
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {barber.specialties.map((spec) => (
-                    <span key={spec} className="px-2.5 py-1 rounded-xl bg-[var(--gold)]/5 border border-[var(--gold)]/15 text-[9px] text-[var(--gold)] font-bold tracking-wide">
+                    <span key={spec} className="px-2.5 py-1 rounded-xl text-[9px] font-bold tracking-wide"
+                      style={{
+                        background: "rgba(0,200,255,0.05)",
+                        border: "1px solid rgba(0,200,255,0.15)",
+                        color: "var(--gold)"
+                      }}>
                       {spec}
                     </span>
                   ))}
                 </div>
               </div>
 
-              {/* Stats panel */}
-              <div className="grid grid-cols-2 gap-4 my-5 py-3 border-y border-neutral-900/40 bg-neutral-950/20 rounded-xl px-2">
+              {/* Stats */}
+              <div className="grid grid-cols-2 gap-3 mb-4 py-3 px-3 rounded-2xl"
+                style={{ background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.03)" }}>
                 <div className="text-center">
-                  <span className="text-[7.5px] font-bold text-neutral-500 uppercase tracking-[0.1em] block">Cortes Realizados</span>
+                  <span className="text-[8px] font-bold text-neutral-600 uppercase tracking-wide block">Cortes</span>
                   <span className="text-sm font-black text-white mt-1 block">{barber.cuts.toLocaleString()}+</span>
                 </div>
-                <div className="text-center border-l border-neutral-900/60">
-                  <span className="text-[7.5px] font-bold text-neutral-500 uppercase tracking-[0.1em] block">Calificación</span>
-                  <span className="text-sm font-black text-[var(--gold)] mt-1 block">{barber.rating} / 5.0</span>
+                <div className="text-center" style={{ borderLeft: "1px solid rgba(255,255,255,0.05)" }}>
+                  <span className="text-[8px] font-bold text-neutral-600 uppercase tracking-wide block">Rating</span>
+                  <span className="text-sm font-black mt-1 block" style={{ color: "var(--gold)" }}>{barber.rating}/5.0</span>
                 </div>
               </div>
 
-              {/* Call to action book button */}
-              <Link href="/reservar" className="block" onClick={playHapticClick}>
-                <Button variant="primary" size="md" fullWidth className="!py-3 !text-xs !rounded-xl font-bold bg-[var(--gold)] text-black">
+              {/* CTA */}
+              <Link href="/reservar" onClick={playHapticClick}>
+                <button className="w-full py-3 rounded-2xl text-xs font-bold text-black flex items-center justify-center gap-2 transition-all duration-200 cursor-pointer"
+                  style={{ background: "var(--gold)", boxShadow: "0 0 18px rgba(0,200,255,0.25)" }}>
                   Reservar con {barber.name.split(" ")[0]}
-                </Button>
+                  <ArrowRight size={13} />
+                </button>
               </Link>
             </div>
           </motion.div>

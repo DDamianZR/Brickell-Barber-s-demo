@@ -32,15 +32,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variants = {
       primary:
-        "bg-[var(--gold)] text-black hover:bg-[var(--gold-light)] shadow-lg hover:shadow-[0_0_20px_rgba(201,162,39,0.4)] active:scale-[0.98]",
+        "bg-[var(--gold)] text-black font-bold hover:bg-[var(--gold-light)] shadow-lg shadow-[var(--gold)]/20 hover:shadow-[0_0_22px_rgba(0,200,255,0.45)] active:scale-[0.97] transition-all duration-200",
       secondary:
-        "bg-[var(--surface)] text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--gold)] hover:text-[var(--gold)] active:scale-[0.98]",
+        "bg-[var(--surface)] text-[var(--foreground)] border border-[var(--border)] hover:border-[var(--gold)]/40 hover:text-[var(--gold)] active:scale-[0.97]",
       ghost:
-        "bg-transparent text-[var(--foreground)] hover:bg-[var(--surface)] active:scale-[0.98]",
+        "bg-transparent text-[var(--foreground)] hover:bg-[var(--surface)] active:scale-[0.97]",
       outline:
-        "bg-transparent text-[var(--gold)] border border-[var(--gold)] hover:bg-[var(--gold)] hover:text-black active:scale-[0.98]",
+        "bg-transparent text-[var(--gold)] border border-[var(--gold)]/50 hover:bg-[var(--gold)] hover:text-black hover:shadow-[0_0_18px_rgba(0,200,255,0.35)] active:scale-[0.97]",
       danger:
-        "bg-red-600 text-white hover:bg-red-500 active:scale-[0.98]",
+        "bg-[var(--red-accent)] text-white hover:bg-[var(--red-accent-light)] hover:shadow-[0_0_18px_rgba(255,17,51,0.4)] active:scale-[0.97]",
     };
 
     const sizes = {

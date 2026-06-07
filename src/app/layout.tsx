@@ -34,79 +34,89 @@ export default function RootLayout({
           <div className="min-h-screen w-full flex flex-col lg:flex-row bg-[#07080A]">
             
             {/* 1. Presentation Sidebar - Desktop Only */}
-            <aside className="hidden lg:flex lg:w-[45%] xl:w-[40%] flex-col justify-between p-12 bg-gradient-to-b from-[#0C0D10] to-[#08090C] border-r border-neutral-900 overflow-y-auto shrink-0 select-none">
-              {/* Header Info */}
-              <div>
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="relative w-12 h-12 rounded-2xl bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] p-0.5 shadow-lg shadow-[var(--gold)]/15">
-                    <div className="relative w-full h-full rounded-[14px] bg-[#0E0F12] overflow-hidden flex items-center justify-center">
-                      <span className="text-xl font-black text-[var(--gold)] tracking-tighter">B</span>
-                    </div>
+            <aside className="hidden lg:flex lg:w-[45%] xl:w-[40%] flex-col justify-between p-10 xl:p-12 overflow-y-auto shrink-0 select-none relative"
+              style={{ background: "linear-gradient(160deg, #0A0C10 0%, #070A0D 60%, #09080D 100%)", borderRight: "1px solid rgba(0,200,255,0.07)" }}>
+
+              {/* Ambient glow decorations */}
+              <div className="absolute top-0 left-0 w-64 h-64 rounded-full blur-[140px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(0,200,255,0.07) 0%, transparent 70%)" }} />
+              <div className="absolute bottom-0 right-0 w-56 h-56 rounded-full blur-[120px] pointer-events-none"
+                style={{ background: "radial-gradient(circle, rgba(255,17,51,0.05) 0%, transparent 70%)" }} />
+
+              <div className="relative z-10">
+                {/* Brand */}
+                <div className="flex items-center gap-3 mb-12">
+                  <div className="relative w-11 h-11 rounded-2xl overflow-hidden shrink-0"
+                    style={{ border: "1px solid rgba(0,200,255,0.2)", boxShadow: "0 0 12px rgba(0,200,255,0.08)" }}>
+                    <img src="/images/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
                   </div>
                   <div>
-                    <span className="text-lg font-black tracking-widest text-[var(--foreground)] uppercase block">
+                    <span className="text-base font-black tracking-widest text-white uppercase block leading-none">
                       BRICKELL
                     </span>
-                    <span className="text-xs tracking-[0.3em] text-[var(--gold)] uppercase font-semibold leading-none">
+                    <span className="text-[10px] tracking-[0.3em] font-bold uppercase leading-none"
+                      style={{ color: "var(--gold)" }}>
                       BARBER'S
                     </span>
                   </div>
                 </div>
 
-                <div className="space-y-6 mt-12">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[var(--gold)]/20 bg-[var(--gold-glow)] text-[10px] font-bold text-[var(--gold)] tracking-widest uppercase">
+                {/* Badge */}
+                <div className="mb-7">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold tracking-widest uppercase"
+                    style={{ border: "1px solid rgba(0,200,255,0.2)", background: "rgba(0,200,255,0.06)", color: "var(--gold)" }}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--gold)] animate-pulse" />
                     Propuesta Digital VIP
                   </span>
-                  
-                  <h1 className="text-4xl xl:text-5xl font-black leading-tight text-white tracking-tight">
-                    Experiencia Móvil <br />
-                    <span className="text-gradient-gold">Ultra Premium</span>
-                  </h1>
-                  
-                  <p className="text-sm text-neutral-400 leading-relaxed max-w-md">
-                    Diseñamos una interfaz táctil optimizada al píxel, fusionando minimalismo elegante con toques de neomorfismo para reflejar la excelencia física de Brickell Barber's en el entorno digital.
-                  </p>
                 </div>
 
-                {/* Features List */}
-                <div className="mt-10 space-y-5">
+                {/* Heading */}
+                <h1 className="text-4xl xl:text-5xl font-black leading-[1.08] text-white mb-5">
+                  Diseño<br />
+                  <span className="text-gradient-gold">Ultra Premium</span><br />
+                  para Móvil
+                </h1>
+
+                <p className="text-sm text-neutral-500 leading-relaxed max-w-sm mb-10">
+                  Interfaz táctil de precisión con estética neon-noir, optimizada para la experiencia Brickell.
+                </p>
+
+                {/* Features */}
+                <div className="space-y-5">
                   {[
-                    { title: "Minimalismo Neomórfico", desc: "Controles volumétricos y relieves táctiles que invitan a interactuar." },
-                    { title: "Reserva Inteligente en 3 Clics", desc: "Un flujo ágil optimizado para reservar servicio, barbero y hora en segundos." },
-                    { title: "Club VIP & Fidelidad Digital", desc: "Tarjeta digital con sellos acumulativos y simulación de visitas." }
+                    { title: "Neomorfismo Oscuro", desc: "Relieves táctiles sobre fondos profundos que invitan a interactuar.", icon: "◆" },
+                    { title: "Reserva en 3 Clics", desc: "Flujo optimizado para elegir servicio, barbero y hora al instante.", icon: "◆" },
+                    { title: "Club VIP Digital", desc: "Tarjeta de sellos y puntos acumulables con beneficios premium.", icon: "◆" }
                   ].map((feat, i) => (
-                    <div key={i} className="flex gap-3">
-                      <div className="w-5 h-5 rounded-full bg-[var(--gold)]/10 flex items-center justify-center text-[var(--gold)] text-xs font-bold mt-0.5 shrink-0">
-                        ✓
+                    <div key={i} className="flex gap-3.5 group">
+                      <div className="w-5 h-5 rounded-lg flex items-center justify-center mt-0.5 shrink-0 text-[8px]"
+                        style={{ background: "rgba(0,200,255,0.08)", border: "1px solid rgba(0,200,255,0.15)", color: "var(--gold)" }}>
+                        {feat.icon}
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-neutral-200">{feat.title}</h4>
-                        <p className="text-xs text-neutral-500 mt-1 leading-relaxed">{feat.desc}</p>
+                        <h4 className="text-sm font-bold text-neutral-200">{feat.title}</h4>
+                        <p className="text-[11px] text-neutral-600 mt-0.5 leading-relaxed">{feat.desc}</p>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* QR Code & Scan Prompt */}
-              <div className="mt-12 pt-8 border-t border-neutral-900 flex items-center gap-6">
-                {/* Simulated QR Code SVG */}
-                <div className="relative w-24 h-24 bg-white p-2 rounded-xl shrink-0 shadow-lg shadow-black/40 group overflow-hidden">
+              {/* QR Code & footer */}
+              <div className="relative z-10 mt-10 pt-7 flex items-center gap-5"
+                style={{ borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                <div className="relative w-20 h-20 bg-white p-1.5 rounded-xl shrink-0 overflow-hidden"
+                  style={{ boxShadow: "0 0 16px rgba(0,200,255,0.15)" }}>
                   <svg viewBox="0 0 100 100" className="w-full h-full text-black">
-                    {/* QR Finder patterns */}
                     <rect x="0" y="0" width="30" height="30" fill="currentColor" />
                     <rect x="5" y="5" width="20" height="20" fill="white" />
                     <rect x="10" y="10" width="10" height="10" fill="currentColor" />
-
                     <rect x="70" y="0" width="30" height="30" fill="currentColor" />
                     <rect x="75" y="5" width="20" height="20" fill="white" />
                     <rect x="80" y="10" width="10" height="10" fill="currentColor" />
-
                     <rect x="0" y="70" width="30" height="30" fill="currentColor" />
                     <rect x="5" y="75" width="20" height="20" fill="white" />
                     <rect x="10" y="80" width="10" height="10" fill="currentColor" />
-                    
-                    {/* Fake data dots */}
                     <rect x="40" y="5" width="10" height="10" fill="currentColor" />
                     <rect x="55" y="10" width="5" height="15" fill="currentColor" />
                     <rect x="45" y="25" width="15" height="5" fill="currentColor" />
@@ -118,15 +128,15 @@ export default function RootLayout({
                     <rect x="55" y="85" width="15" height="5" fill="currentColor" />
                     <rect x="85" y="85" width="10" height="10" fill="currentColor" />
                   </svg>
-                  
-                  {/* Glowing Laser Scan Bar */}
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-emerald-500 shadow-[0_0_8px_#10b981] animate-[float_2s_ease-in-out_infinite]" />
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-[var(--gold)] animate-[float_2s_ease-in-out_infinite]"
+                    style={{ boxShadow: "0 0 6px var(--gold)" }} />
                 </div>
-                
                 <div>
-                  <h5 className="text-xs font-bold text-[var(--gold)] uppercase tracking-wider">Pruébalo en tu Celular</h5>
-                  <p className="text-[11px] text-neutral-500 mt-1.5 leading-relaxed">
-                    Escanea este código QR o abre la URL en tu celular para ver el rediseño responsivo sin simulador.
+                  <h5 className="text-[11px] font-bold uppercase tracking-widest mb-1" style={{ color: "var(--gold)" }}>
+                    Escanea en tu celular
+                  </h5>
+                  <p className="text-[10px] text-neutral-600 leading-relaxed">
+                    Abre la URL en tu móvil para ver la experiencia real sin simulador.
                   </p>
                 </div>
               </div>

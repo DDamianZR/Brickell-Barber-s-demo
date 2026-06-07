@@ -33,16 +33,16 @@ export default function MobileHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-[90] w-full px-4 py-3 bg-[var(--background)]/90 backdrop-blur-md border-b border-[var(--border)] flex items-center justify-between select-none">
+      <header className="sticky top-0 z-[90] w-full px-4 py-2.5 bg-[var(--background)]/92 backdrop-blur-xl border-b border-[var(--border)] flex items-center justify-between select-none" style={{ boxShadow: "0 1px 0 rgba(0,200,255,0.06)" }}>
         {/* Brand logo & name with hamburger Menu toggle */}
         <div className="flex items-center gap-2.5">
           <motion.button
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: 0.88 }}
             onClick={() => { playHapticClick(); setIsMenuOpen(true); }}
-            className="p-1.5 rounded-xl neo-btn flex items-center justify-center shrink-0 cursor-pointer"
+            className="p-2 rounded-xl neo-btn flex items-center justify-center shrink-0 cursor-pointer"
             aria-label="Open menu"
           >
-            <Menu size={14} className="text-[var(--foreground)] opacity-75" />
+            <Menu size={15} className="text-[var(--foreground)] opacity-70" />
           </motion.button>
 
           <Link href="/" className="flex items-center gap-2 group active:scale-95 transition-transform" onClick={playHapticClick}>
