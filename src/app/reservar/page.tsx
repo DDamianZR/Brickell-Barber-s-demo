@@ -140,7 +140,7 @@ export default function ReservarPage() {
             initial={{ width: 0 }}
             animate={{ width: `${(step / STEPS.length) * 100}%` }}
             transition={{ duration: 0.3 }}
-            className="h-full rounded-full bg-gradient-to-r from-[var(--gold)] to-[var(--gold-light)]"
+            className="h-full rounded-full bg-gradient-to-r from-[#2a1792] to-[#8b0003]"
           />
         </div>
       </div>

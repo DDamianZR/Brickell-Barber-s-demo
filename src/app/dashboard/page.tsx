@@ -87,7 +87,7 @@ export default function DashboardPage() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="relative w-full h-44 rounded-3xl p-5 bg-gradient-to-br from-[#1C1D21] via-[#121316] to-[#0A0B0D] border border-white/5 shadow-2xl flex flex-col justify-between mb-8 overflow-hidden"
+        className="relative w-full h-44 rounded-3xl p-5 bg-gradient-to-br from-[#160f4c] via-[#090A0C] to-[#2b0304] border border-white/5 shadow-2xl flex flex-col justify-between mb-8 overflow-hidden"
       >
         {/* Shiny radial sheen */}
         <div className="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_center,_#ffffff_0%,_transparent_100%)] pointer-events-none" />
@@ -162,7 +162,7 @@ export default function DashboardPage() {
                       animate={{ scale: 1, rotate: 0 }}
                       exit={{ scale: 0 }}
                       transition={{ type: "spring", stiffness: 380, damping: 15 }}
-                      className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] flex flex-col items-center justify-center text-black shadow-lg shadow-[var(--gold)]/15 border border-[var(--gold-light)]/20"
+                      className="absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark)] flex flex-col items-center justify-center text-white shadow-lg shadow-[var(--gold)]/25 border border-white/10"
                     >
                       {isLast ? (
                         <Gift size={16} className="stroke-[2.5]" />

@@ -33,12 +33,12 @@ export default function MobileTabBar() {
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="w-14 h-14 rounded-full bg-gradient-to-br from-[var(--gold)] to-[var(--gold-dark,#A07B10)] flex items-center justify-center text-black shadow-lg shadow-[var(--gold)]/20 border border-[var(--gold-light,#E0B84A)]/30 active:shadow-inner cursor-pointer"
+                  className="w-14 h-14 rounded-full bg-gradient-to-br from-[#2a1792] to-[#8b0003] flex items-center justify-center text-white shadow-lg shadow-[#2a1792]/30 border border-white/10 active:shadow-inner cursor-pointer"
                 >
                   <Icon size={22} className="stroke-[2.5]" />
                   
                   {/* Subtle pulsing outer ring */}
-                  <div className="absolute inset-0 rounded-full border border-[var(--gold)] animate-ping opacity-15 pointer-events-none" />
+                  <div className="absolute inset-0 rounded-full border border-[#2a1792] animate-ping opacity-15 pointer-events-none" />
                 </motion.div>
                 <span className="block text-[8px] font-bold text-center text-[var(--gold)] uppercase tracking-wider mt-1 leading-none">
                   Cita
